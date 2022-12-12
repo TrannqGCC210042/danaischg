@@ -1,15 +1,234 @@
-<!-- bootstrap 5 cdn-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+<link href="css/productCart.css" rel="stylesheet" media="all">
 
 <section>
-    <img class="imageCenter" src="images/fashion.jpg" alt="" />
+    <img class="imageCenter" src="images/homepage_2.jpg" alt="" />
 </section>
 </body>
 <hr />
 <section>
-    <h4 class="ms-3">Sale</h4>
+    <h4 class="attentive ms-3">Sale</h4>
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Brushed_Loopback_Trouser_Natural_1.png">
+                        </a>
+                        <span class="product-discount-label">-23%</span>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Brushed Loopback Trouser Natural</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$53.55 <span>$68.88</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Wool_CPO_Jacket_Black_Men_1.png">
+                        </a>
+                        <span class="product-discount-label">-23%</span>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Wool CPO Jacket Black Ment</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$82.55 <span>$118.88</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Knit_Crop_Tee_ArmyGreen_1.png">
+                        </a>
+                        <span class="product-discount-label">-30%</span>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Knit Crop Tee ArmyGreen</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$82.55 <span>$68.88</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Herdsman_Turtleneck_1.png">
+                        </a>
+                        <span class="product-discount-label">-20%</span>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Camellia Floral Minidress</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$82.55 <span>$78.88</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <hr />
+<section>
+    <h4 class="attentive ms-3">Best seller</h4>
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Camellia_Floral_Minidress_1.png">
+                        </a>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Herdsman Turtleneck</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$79.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Leo_Cutout_Wool_Blazer_Brown_3.png">
+                        </a>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Knitm Cropm Teem Beige</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$55.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Leo_Cutout_Wool_Blazer_Blue_1.png">
+                        </a>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Leo Cutout Wool Blazer Blue</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$175.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-2">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="images/Pleated_Short_Skirt_1.png">
+                        </a>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                        <a href="" class="add-to-cart">Add to Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Pleated Short Skirt</a></h3>
+                        <span class="product-color d-flex justify-content-center">
+                            <ul class="ul-color">
+                                <li><a href="" class="green-active"></a></li>
+                                <li><a href="" class="blue"></a></li>
+                                <li><a href="" class="yellow"></a></li>
+                            </ul>
+                        </span>
+                        <div class="price">$65.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

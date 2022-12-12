@@ -1,7 +1,8 @@
-<!-- Footer -->
+<style> @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap'); </style>
+
 <hr>
 <footer class="text-center text-lg-start text-dark">
-    <div class="text-md-start">
+    <div style="text-align: justify;     font-family: 'Poppins', sans-serif;" class="text-md-start">
         <!-- Grid row -->
         <div class="row mt-4 mx-2">
             <!-- Grid column -->
@@ -9,7 +10,7 @@
                 <!-- Content -->
                 <h6 class="text-uppercase fw-bold">About us</h6>
                 <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: grey; height: 2px" />
-                <p style="text-align: justify;" class="mx-5">
+                <p class="mx-5">
                     Dana.ischg Store is a brand from Vietnam, born in 2022. Started off as a small thrift shop in CanTho, Vietnam. Through the lens of fashionary, Dana.ischg would like to share experiences and POV in music, movies, and art, connecting the community of youth with global lifestyle.
                 </p>
             </div>
@@ -55,4 +56,3 @@
     </div>
     <!-- Copyright -->
 </footer>
-<!-- Footer -->

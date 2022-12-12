@@ -31,8 +31,11 @@
     } else {
         include_once 'home.php';
     }
+    // include_once 'productCart.php';
     include_once 'footer.php';
     ?>
+    
+
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->

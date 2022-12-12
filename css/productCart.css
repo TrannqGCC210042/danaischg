@@ -1,17 +1,60 @@
-section {
-    /* float: left;
-    padding: 20px;
-    width: 70%;
-    background-color: #f1f1f1;
-    height: 300px; */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+
+/* ==========================================================================
+   #Home
+   ========================================================================== */
+
+.attentive {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    text-align: center;
 }
 
-.row {
-    --bs-gutter-x: 7.5rem;
+.product-content .ul-color {
+    margin: 0;
+    padding: 0;
 }
+
+.product-content .ul-color li {
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+}
+
+.product-content .ul-color li:first-child {
+    margin-left: 0;
+}
+
+.product-content .ul-color li:last-child {
+    margin-right: 0;
+}
+
+.product-content .ul-color li a {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+}
+
+.product-content .ul-color li a.green-active {
+    background-color: green;
+}
+
+.product-content .ul-color li a.blue {
+    background-color: blue;
+}
+
+.product-content .ul-color li a.yellow {
+    background-color: yellow;
+}
+
+
+/* ==========================================================================
+   #Card 
+   ========================================================================== */
 
 .product-grid {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
 }
 
@@ -32,7 +75,7 @@ section {
 
 .product-grid .product-discount-label {
     color: #fff;
-    background: #a5ba8d;
+    background: black;
     font-size: 13px;
     font-weight: 600;
     line-height: 25px;
@@ -49,7 +92,7 @@ section {
     position: absolute;
     top: 10px;
     right: -50px;
-    transition: all 0.5s ease 0s;
+    transition: all .5s ease 0s;
 }
 
 .product-grid:hover .product-links {
@@ -79,7 +122,7 @@ section {
 }
 
 .product-grid .add-to-cart {
-    background: #a5ba8d;
+    background: black;
     color: #fff;
     font-size: 16px;
     text-transform: uppercase;
@@ -119,7 +162,7 @@ section {
 }
 
 .product-grid .title a:hover {
-    color: #a5ba8d;
+    color: black;
 }
 
 .product-grid .price {

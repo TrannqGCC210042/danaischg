@@ -11,7 +11,8 @@
 
     <!-- Main CSS-->
     <link href="css/register.css" rel="stylesheet" media="all">
-    <div class="page-wrapper p-t-50 p-b-50 font-robo">
+
+        <div class="page-wrapper p-t-50 p-b-50 font-robo">
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
                 <div class="card-body">
