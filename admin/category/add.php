@@ -17,7 +17,7 @@
 </script>
 
 <section class="row">
-    <?php
+    <?php   
     include_once 'admin/nav.php';
     ?>
     <div class="pt-3 col-lg-10 col-md-9 col-12">
@@ -40,8 +40,8 @@
             </div>
 
             <div class="form-group text-center mt-4">
-                <input type="submit" class="btn btn-info" name="btnAdd_category" value="Add new" />
-                <input type="button" class="btn btn-info" name="btnIgnore" value="Cancel" onclick="window.location='category.html'" />
+                <input type="submit" class="btn btn-dark" name="btnAdd_category" value="Add new" />
+                <input type="button" class="btn btn-dark" name="btnIgnore" value="Cancel" onclick="window.location='?page=category'" />
             </div>
         </form>
     </div>

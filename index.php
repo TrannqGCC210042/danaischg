@@ -27,29 +27,52 @@
 
     if (isset($_GET['page'])) :
         $page = $_GET['page'];
+
         // Login & Register
         if ($page == "register") :
             include_once 'register.php';
         elseif ($page == "login") :
             include_once 'demo.php';
+
         // Home
         elseif ($page == "product") :
             include_once 'product.php';
+
         // Admin page
         elseif ($page == "order") :
             include_once 'admin/order/order.php';
+
+        // Manament category
         elseif ($page == "category") :
             include_once 'admin/category/list.php';
         elseif ($page == "addCategory") :
             include_once 'admin/category/add.php';
         elseif ($page == "updateCategory") :
             include_once 'admin/category/update.php';
+
+        // Manament supplier
         elseif ($page == "supplier") :
             include_once 'admin/supplier/list.php';
-        elseif ($page == "product") :
+        elseif ($page == "addSupplier") :
+            include_once 'admin/supplier/add.php';
+        elseif ($page == "updateSupplier") :
+            include_once 'admin/supplier/update.php';
+
+        // Manament product
+        elseif ($page == "productManament") :
             include_once 'admin/product/list.php';
+        elseif ($page == "addProduct") :
+            include_once 'admin/product/add.php';
+        elseif ($page == "updateProduct") :
+            include_once 'admin/product/update.php';
+
+        // Manament orderDetail
         elseif ($page == "orderDetail") :
-            include_once 'admin/orderDetail/orderDetail.php';
+            include_once 'admin/orderDetail/list.php';
+        elseif ($page == "addOrderDetail") :
+            include_once 'admin/orderDetail/add.php';
+        elseif ($page == "updateOrderDetail") :
+            include_once 'admin/orderDetail/update.php';
 
         endif;
     else :

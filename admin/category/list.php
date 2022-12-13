@@ -17,8 +17,7 @@
             <h1 class="text-center">Category List</h1>
             <div class="text-center mb-2 row">
                 <div class="col-6 d-flex justify-content-start align-items-center">
-                    <a href="?page=addCategory" class="btn btn-outline-info"><i class="bi bi-plus-circle"></i>
-                        Add</a>
+                    <a href="?page=addCategory" class="btn btn-outline-dark"><i class="bi bi-plus-circle"></i>Add</a>
                 </div>
                 <div class="col-6 d-flex justify-content-end align-items-center">
                     <form action="/manage/category" method="GET" class="d-flex input-group w-auto">
@@ -64,12 +63,12 @@
                             <td class="text-center align-middle"><?= $row['name'] ?></td>
                             <td class="align-middle"><?= $row['description'] ?></td>
 
-                            <td class="text-center align-middle">
+                        <td class="text-center align-middle">
                                 <a href="?page=updateCategory&cat_id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
                             </td>
 
                             <td class="text-center align-middle">
-                                <a href="?page=category&function=del&id=<?= $row['id'] ?>" onclick="return deleteConfirm()"><i class="bi bi-trash-fill" style="color: red;"></i></a>
+                                <a href="?page=category&id=<?= $row['id'] ?>" onclick="return deleteConfirm()"><i class="bi bi-trash-fill" style="color: red;"></i></a>
                             </td>
                         </tr>
                     <?php
@@ -81,7 +80,7 @@
     </div>
 </section>
 <?php
-if (isset($_GET['function']) == "del" && isset($_GET['id'])) :
+if (isset($_GET['id'])) :
     $id = $_GET['id'];
 
     $c = new Connect();

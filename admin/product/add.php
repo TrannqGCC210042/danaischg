@@ -136,9 +136,9 @@
                         <input type="file" name="image" id="Image" class="form-control-file" required />
                     </div>
 
-                    <div class="form-group text-center">
-                        <input type="submit" class="btn btn-info" name="btnAdd" value="Add new" />
-                        <input type="button" class="btn btn-info" name="btnIgnore" value="Cancel" onclick="window.location='product.html'" />
+                    <div class="form-group text-center mt-4">
+                        <input type="submit" class="btn btn-dark" name="btnAdd_category" value="Add new" />
+                        <input type="button" class="btn btn-dark" name="btnIgnore" value="Cancel" onclick="window.location='?page=category'" />
                     </div>
                 </form>
             </div>
