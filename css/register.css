@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 /* ==========================================================================
    #GRID
    ========================================================================== */
@@ -241,11 +243,13 @@ h6 {
 }
 
 .btn--black {
+    color: white;
     background: black;
 }
 
 .btn--black:hover {
-    background: rgb(186, 186, 186);
+    background: grey;
+    color: black;
 }
 
 
@@ -424,7 +428,8 @@ input {
 
 .rs-select2 .select2-container .select2-selection--single .select2-selection__arrow:after {
     font-family: "Material-Design-Iconic-Font";
-    content: '\f2f9';
+    /* font-family: 'Poppins', sans-serif; */
+    content: "\f2f9";
     color: #ccc;
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
@@ -460,6 +465,7 @@ input {
 
 .title {
     margin-bottom: 37px;
+    color: rgb(20, 18, 18);
 }
 
 

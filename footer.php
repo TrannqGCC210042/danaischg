@@ -2,7 +2,7 @@
 
 <hr>
 <footer class="text-center text-lg-start text-dark">
-    <div style="text-align: justify;     font-family: 'Poppins', sans-serif;" class="text-md-start">
+    <div style="text-align: justify; font-family: 'Poppins', sans-serif;" class="text-md-start">
         <!-- Grid row -->
         <div class="row mt-4 mx-2">
             <!-- Grid column -->
@@ -45,7 +45,7 @@
                 <p><i class="fas fa-home mr-3"></i> 160 Mac Thien Tich, Can Tho</p>
                 <p><i class="fas fa-envelope mr-3"></i> DanaischgStore@gmail.com</p>
                 <p><i class="fas fa-phone mr-3"></i> 0843 630 939</p>
-                <p><i class="fas fa-print mr-3"></i> 0916 847</p>
+                <p><i class="fas fa-print mr-3"></i> 0916 843 367</p>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
-<link href="css/productCart.css" rel="stylesheet" media="all">
+<link href="css/cardProduct.css" rel="stylesheet" media="all">
 
 <section>
-    <img class="imageCenter" src="images/homepage_2.jpg" alt="" />
+    <img class="imageCenter" src="images/Poster_header.jpg" alt="Images Danaischg Store" />
 </section>
 </body>
 <hr />
@@ -9,7 +9,7 @@
     <h4 class="attentive ms-3">Sale</h4>
     <div class="container py-4">
         <div class="row">
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">
@@ -24,7 +24,7 @@
                         <a href="" class="add-to-cart">Add to Cart</a>
                     </div>
                     <div class="product-content">
-                        <h3 class="title"><a href="#">Brushed Loopback Trouser Natural</a></h3>
+                        <h3 class="title"><a href="?page=<?php ?>">Brushed Loopback Trouser Natural</a></h3>
                         <span class="product-color d-flex justify-content-center">
                             <ul class="ul-color">
                                 <li><a href="" class="green-active"></a></li>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">
@@ -125,7 +125,7 @@
     <h4 class="attentive ms-3">Best seller</h4>
     <div class="container py-4">
         <div class="row">
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">
@@ -151,11 +151,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">
-                            <img src="images/Leo_Cutout_Wool_Blazer_Brown_3.png">
+                            <img src="images/Brushed_Loopback_Trouser_Natural_1.png">
                         </a>
                         <ul class="product-links">
                             <li><a href="#"><i class="fa fa-search"></i></a></li>
@@ -177,7 +177,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">
@@ -203,7 +203,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-2">
+            <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="#" class="image">

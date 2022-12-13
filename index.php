@@ -22,19 +22,27 @@
 
 <body>
     <?php
+    include_once 'connect.php';
     include_once 'header.php';
+
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
-        if ($page == "register") {
+
+        if ($page == "register") :
             include_once 'register.php';
-        }
+        elseif ($page == "login") :
+            include_once 'demo.php';
+        elseif ($page == "product") :
+            include_once 'product.php';
+        endif;
     } else {
         include_once 'home.php';
     }
+
     // include_once 'productCart.php';
     include_once 'footer.php';
     ?>
-    
+
 
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
