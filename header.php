@@ -27,15 +27,15 @@
                     <div class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Women</a>
                         <div class="dropdown-menu">
-                            <!-- Add category at homepage -->
                             <?php
                             $c = new Connect();
                             $dblink = $c->connectToMySQL();
-                            $sql = "SELECT * FROM category";
+                            
+                            $sql = "SELECT c.id as cat_id, c.name as cat_name FROM `category` AS c join product as p ON c.id = p.cate_id WHERE p.for_gender = 1";
                             $re = $dblink->query($sql);
-                            while ($row = $re->fetch_row()) :
+                            while ($row = $re->fetch_assoc()) :
                             ?>
-                                <a class="dropdown-item" href="?page=category+cate_id<?= $row[0] ?>"><?= $row[1] ?></a>
+                                <a class="dropdown-item" href="?page=product&cat_id=<?= $row['cat_id'] ?>"><?= $row['cat_name'] ?></a>
                             <?php
                             endwhile;
                             ?>
@@ -44,15 +44,14 @@
                     <div class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Men</a>
                         <div class="dropdown-menu">
-                            <!-- Add category at homepage -->
                             <?php
                             $c = new Connect();
                             $dblink = $c->connectToMySQL();
-                            $sql = "SELECT * FROM category";
+                            $sql = "SELECT c.id as cat_id, c.name as cat_name FROM `category` AS c join product as p ON c.id = p.cate_id WHERE p.for_gender = 0";
                             $re = $dblink->query($sql);
-                            while ($row = $re->fetch_row()) :
+                            while ($row = $re->fetch_assoc()) :
                             ?>
-                                <a class="dropdown-item" href="cat.php?catid=<?= $row[0] ?>"><?= $row[1] ?></a>
+                                <a class="dropdown-item" href="?page=product&cat_id=<?= $row['cat_id'] ?>"><?= $row['cat_name'] ?></a>
                             <?php
                             endwhile;
                             ?>

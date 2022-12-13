@@ -33,12 +33,14 @@
 
         $result = $dblink->prepare($sql);
         $check = $result->execute(array("$username", "$password", "$firstName", "$lastName", $gender, "$birthday", "$telephone", "$email", "$address", 0));
-        if ($check == true) {
+
+
+        if ($check == true):
             // if(confirm)
-            echo "<meta http-equiv='refresh' content='0;url=?page='>";
-        } else {
+            echo "<meta http-equiv='refresh' content='0;url=?page=login'>";
+        else:
             echo "Failed!";
-        }
+        endif;
     }
     ?>
 
@@ -105,3 +107,8 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <?php
+        
+    ?>

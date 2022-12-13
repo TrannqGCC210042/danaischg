@@ -25,19 +25,36 @@
     include_once 'connect.php';
     include_once 'header.php';
 
-    if (isset($_GET['page'])) {
+    if (isset($_GET['page'])) :
         $page = $_GET['page'];
-
+        // Login & Register
         if ($page == "register") :
             include_once 'register.php';
         elseif ($page == "login") :
             include_once 'demo.php';
+        // Home
         elseif ($page == "product") :
             include_once 'product.php';
+        // Admin page
+        elseif ($page == "order") :
+            include_once 'admin/order/order.php';
+        elseif ($page == "category") :
+            include_once 'admin/category/list.php';
+        elseif ($page == "addCategory") :
+            include_once 'admin/category/add.php';
+        elseif ($page == "updateCategory") :
+            include_once 'admin/category/update.php';
+        elseif ($page == "supplier") :
+            include_once 'admin/supplier/list.php';
+        elseif ($page == "product") :
+            include_once 'admin/product/list.php';
+        elseif ($page == "orderDetail") :
+            include_once 'admin/orderDetail/orderDetail.php';
+
         endif;
-    } else {
+    else :
         include_once 'home.php';
-    }
+    endif;
 
     // include_once 'productCart.php';
     include_once 'footer.php';

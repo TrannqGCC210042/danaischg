@@ -1,0 +1,85 @@
+<script>
+    function formValid() {
+        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+        f = document.formUpdatecategory
+        if (format.test(f.name.value)) {
+            alert("Category name can't contain special character, please enter again");
+            f.name.focus();
+            return false;
+        }
+        if (format.test(f.description.value)) {
+            alert("Category description can't contain special character, please enter again");
+            f.txtCatDesc.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<?php
+if (isset($_GET['cat_id'])) :
+    $id = $_GET['cat_id'];
+
+    $c = new Connect();
+    $dblink = $c->connectToPDO();
+
+    $sql = "SELECT * FROM `category` WHERE id = ?";
+
+    $result = $dblink->prepare($sql); 
+    $result->execute(array("$id"));
+
+    $row = $result->fetch(PDO::FETCH_ASSOC);
+
+?>
+    <section class="row">
+        <?php
+        include_once 'admin/nav.php';
+        ?>
+        <div class="pt-3 col-lg-10 col-md-9 col-12">
+            <h1 class="text-center pb-4">Update Category</h1>
+            <form id="formUpdatecategory" name="formUpdatecategory" method="POST" enctype="multipart/form-data" onsubmit="return formValid()">
+                <div class="form-group">
+                    <label class="form-label font-weight-bold" for="txtCatId">Category ID</label>
+                    <input type="text" name="id" id="txtCatId" readonly class="form-control" placeholder="" required value="<?= $row['id'] ?>" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label font-weight-bold" for="txtCatName">Category Name</label>
+                    <input type="text" name="name" id="txtCatName" class="form-control" placeholder="" required value="<?= $row['name'] ?>"/>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label font-weight-bold" for="txtCatDesc">Category Description</label>
+                    <input type="text" name="description" id="txtCatDesc" class="form-control" placeholder="" required value="<?= $row['description'] ?>"/>
+                </div>
+
+                <div class="form-group text-center mt-4">
+                    <input type="submit" class="btn btn-info" name="btnUpdate_category" value="Update" />
+                    <input type="button" class="btn btn-info" name="btnIgnore" value="Cancel" onclick="window.location='category.html'" />
+                </div>
+            </form>
+        </div>
+    </section>
+<?php
+if (isset($_POST['btnUpdate_category'])) :
+    $id = isset($_POST['id']) ? $_POST['id'] : "";
+    $name = isset($_POST['name']) ? $_POST['name'] : "";
+    $description = isset($_POST['description']) ? $_POST['description'] : "";
+
+    $c = new Connect();
+    $dblink = $c->connectToPDO();
+    $sql = "UPDATE `category` SET `name`= ?,`description`= ? WHERE `id` = ?";
+
+    $result = $dblink->prepare($sql);
+    $check = $result->execute(array("$name", "$description", "$id"));
+
+    if ($check == true) :
+        echo "<meta http-equiv='refresh' content='0;url=?page=category'>";
+    else :
+        echo "Failed!";
+    endif;
+endif;
+
+else :
+    echo "<meta http-equiv='refresh' content='0;url=?page=category'>";
+endif;
+?>
