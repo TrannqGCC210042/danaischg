@@ -61,31 +61,10 @@
                     <thead class="justify-content-md-between justify-content-sm-center align-content-center border-bottom border-2 my-2 bg-dark text-light p-3 rounded-3">
                         <tr class="text-center">
                             <th>
-                                <strong>ID</strong>
-                            </th>
-                            <th>
                                 <strong>Product Name</strong>
                             </th>
                             <th>
-                                <strong>Status</strong>
-                            </th>
-                            <th>
                                 <strong>Images</strong>
-                            </th>
-                            <th>
-                                <strong>Description</strong>
-                            </th>
-                            <th>
-                                <strong>Price</strong>
-                            </th>
-                            <th>
-                                <strong>Gender</strong>
-                            </th>
-                            <th>
-                                <strong>Category</strong>
-                            </th>
-                            <th>
-                                <strong>Supplier</strong>
                             </th>
                             <th>
                                 <strong>Edit</strong>
@@ -101,21 +80,14 @@
                         $c = new Connect();
                         $dblink = $c->connectToMySQL();
 
-                        $sql = "SELECT * FROM `product` p;";
+                        $sql = "SELECT * FROM `product_images` pi JOIN `product` p ON pi.pro_id = p.id";
                         $re = $dblink->query($sql);
 
                         while ($row = $re->fetch_assoc()) :
                         ?>
                             <tr>
-                                <td class="text-center align-middle"><?= $row['id']?></td>
-                                <td class="text-center align-middle"><?= $row['name']?></td>
-                                <td class="text-center align-middle"><?= $row['status']?></td>
-                                <td class="text-center align-middle"><a href="?page=pro_image&id=<?= $row['id']?>">See more >></a></td>
-                                <td class="text-center align-middle"><?= $row['description']?></td>
-                                <td class="text-center align-middle"><?= $row['price']?></td>
-                                <td class="text-center align-middle"><?= $row['for_gender']?></td>
-                                <td class="text-center align-middle"><?= $row['cate_id']?></td>
-                                <td class="text-center align-middle"><?= $row['sup_id']?></td>
+                                <td class="text-center align-middle"><?= $row['name'] ?></td>
+                                <td class="text-center align-middle"><img src="images/<?=$row['file_name']?>" alt=""></td>
                                 <td class="text-center align-middle">
                                     <a href="?page=updateproduct&cat_id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
                                 </td>
@@ -128,18 +100,6 @@
                         ?>
                     </tbody>
                 </table>
-                <!-- <div class="wrapper mt-4">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link active" href="/manage/product?page=1">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="/manage/product?page=2">2</a></li>
-                            <li class="page-item"><a class="page-link" href="/manage/product?page=3">3</a></li>
-                            <li class="page-item"><a class="page-link" href="/manage/product?page=2">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> -->
             </div>
         </div>
     </section>

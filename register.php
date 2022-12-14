@@ -10,7 +10,7 @@
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/register.css" rel="stylesheet" media="all">
+    <link href="css/register-login.css" rel="stylesheet" media="all">
 
     <?php
     include_once 'connect.php';
@@ -101,7 +101,7 @@
                             <input class="input--style-1" type="text" placeholder="ADDRESS" name="address">
                         </div>
                         <div class="p-t-20">
-                            <input class="btn-register btn--radius btn--black" type="submit" value="Register" name="btn-register"></input>
+                            <input class="btn-click btn--radius btn--black" type="submit" value="Register" name="btn-register"></input>
                         </div>
                     </form>
                 </div>

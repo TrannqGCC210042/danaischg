@@ -32,7 +32,7 @@
         if ($page == "register") :
             include_once 'register.php';
         elseif ($page == "login") :
-            include_once 'demo.php';
+            include_once 'login.php';
 
         // Home
         elseif ($page == "product") :
@@ -59,12 +59,14 @@
             include_once 'admin/supplier/update.php';
 
         // Manament product
-        elseif ($page == "productManament") :
+        elseif ($page == "productManagement") :
             include_once 'admin/product/list.php';
         elseif ($page == "addProduct") :
             include_once 'admin/product/add.php';
         elseif ($page == "updateProduct") :
             include_once 'admin/product/update.php';
+        elseif ($page == "productImages") :
+            include_once 'admin/product/product_images.php';
 
         // Manament orderDetail
         elseif ($page == "orderDetail") :

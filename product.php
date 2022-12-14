@@ -24,6 +24,8 @@
                                 <option disabled="disabled" value="2" selected>SORT BY</option>
                                 <option value="0">Male</option>
                                 <option value="1">Female</option>
+                                <option value="0">High to low</option>
+                                <option value="1">Low to high</option>
                             </select>
                             <div class="select-dropdown"></div>
                         </div>

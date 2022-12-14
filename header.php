@@ -84,15 +84,15 @@
                         </ul>
                     </div> -->
                     <?php
-                    if (isset($_COOKIE['cc_usename'])) :
+                    if (isset($_COOKIE['usename'])) :
                     ?>
-                        <a href="?page=login" class="btn btn-outline-dark me-2">My account <?= $_COOKIE['cc_usename'] ?></a>
+                        <a href="?page=index.php" class="btn btn-outline-dark me-2">My account <?= $_COOKIE['usename'] ?></a>
                         <a href="?page=register" class="btn btn-dark me-2">Logout</a>
 
                     <?php
                     else :
                     ?>
-                        <a href="?page=login" class="btn btn-outline-dark me-2 ms-5">Login</a>
+                        <a href="index.php" class="btn btn-outline-dark me-2 ms-5">Login</a>
                         <a href="?page=register" class="btn btn-dark me-4">Sign-up</a>
                     <?php
                     endif;

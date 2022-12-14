@@ -10,9 +10,9 @@
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/register.css" rel="stylesheet" media="all">
+    <link href="css/register-login.css" rel="stylesheet" media="all">
 
-        <div class="page-wrapper p-t-50 p-b-50 font-robo">
+    <div class="page-wrapper p-t-50 font-robo">
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
                 <div class="card-body">
@@ -23,12 +23,31 @@
                         </div>
                         <div class="input-group">
                             <input class="input--style-1" type="password" placeholder="PASSWORD" name="password">
-                        </div>                        
+                        </div>
                         <div class="p-t-20">
-                            <button class="btn-register btn--radius btn--black" type="submit">Login</button>
+                            <button class="btn-click btn--radius btn--black" type="submit" name="btnLogin">Login</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <?php
+    if(isset($_POST['btnLogin'])):
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $c = new Connect();
+        $dblink = $c->connectToPDO();
+        $sql = "SELECT * FROM `user` WHERE `username` = ? AND `password` = ?";
+
+        $result = $dblink->prepare($sql);
+        $check = $result->execute(array("$username", "$password"));
+        
+        if($check):
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $_COOKIE['username'] = $row['username'];
+        endif;
+    endif;
+    ?>

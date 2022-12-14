@@ -19,7 +19,7 @@
             <h1 class="text-center">Supplier List</h1>
             <div class="text-center mb-2 row">
                 <div class="col-6 d-flex justify-content-start align-items-center">
-                    <a href="?page=addSupplier" class="btn btn-outline-dark"><i class="bi bi-plus-circle"></i>Add</a>
+                    <a href="?page=addSupplier" class="btn btn-outline-dark"><i class="bi bi-plus-circle pe-2"></i>Add</a>
                 </div>
                 <div class="col-6 d-flex justify-content-end align-items-center">
                     <form action="/manage/supplier" method="GET" class="d-flex input-group w-auto">
