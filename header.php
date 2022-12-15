@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="css/header.css" />
 
     <header>
-        <img class="navbar-brand" src="images/logo.png" />
+        <img class="navbar-brand" src="images/logo.png" onclick="window.location='index.php'" />
         <hr class="line" />
         <div class="navbar navbar-expand-xl navbar-light bg-light">
             <!-- Menu in mobile phone-->
@@ -22,7 +22,7 @@
                 <!-- Menu bar -->
                 <div class="container navbar-nav justify-content-center">
                     <!-- active: highline -->
-                    <a class="nav-link" href="?index.php">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                     <a class="nav-link" href="?page=product">Product</a>
                     <div class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Women</a>
@@ -30,7 +30,7 @@
                             <?php
                             $c = new Connect();
                             $dblink = $c->connectToMySQL();
-                            
+
                             $sql = "SELECT c.id as cat_id, c.name as cat_name FROM `category` AS c join product as p ON c.id = p.cate_id WHERE p.for_gender = 1";
                             $re = $dblink->query($sql);
                             while ($row = $re->fetch_assoc()) :
@@ -43,6 +43,7 @@
                     </div>
                     <div class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Men</a>
+                        
                         <div class="dropdown-menu">
                             <?php
                             $c = new Connect();
@@ -57,42 +58,40 @@
                             ?>
                         </div>
                     </div>
-                    <a class="nav-link" href="#">Delivery</a>
-                    <a class="nav-link" href="#">Support</a>
+                    <!-- <a class="nav-link" href="#">Delivery</a>
+                    <a class="nav-link" href="#">Support</a> -->
                 </div>
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
-                    <!-- Icon -->
-                    <!-- <a class="text-reset me-3" href="#">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    </a> -->
-                    <!-- Avatar -->
-                    <!-- <div class="dropdown">
-                        <a class="d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAccount" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="images/account.pnj" class="rounded-circle" height="36" alt="My account" loading="lazy" />
-                            <label for="account" class="ms-2 me-4 link-dark">myaccount</label>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdownMenuAccount">
-                            <li>
-                                <a class="dropdown-item text-decoration-none" href="#">
-                                    <i class="bi bi-person-fill"></i> My account</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="bi bi-box-arrow-right"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </div> -->
+
                     <?php
-                    if (isset($_COOKIE['usename'])) :
+                    if (isset($_SESSION['username'])) :
                     ?>
-                        <a href="?page=index.php" class="btn btn-outline-dark me-2">My account <?= $_COOKIE['usename'] ?></a>
-                        <a href="?page=register" class="btn btn-dark me-2">Logout</a>
+                        <!-- Icon -->
+                        <a class="text-reset me-3" href="#">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                        <!-- Avatar -->
+                        <div class="dropdown">
+                            <a class="d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAccount" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="images/account.png" class="rounded-circle" height="36" alt="My account" loading="lazy" />
+                                <label for="account" class="ms-2 me-4 link-dark"><?= $_SESSION['username'] ?></label>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdownMenuAccount">
+                                <li>
+                                    <a href="?page=index.php" class="dropdown-item">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="?page=logout">
+                                        <a href="?page=logout" class="dropdown-item">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
 
                     <?php
                     else :
                     ?>
-                        <a href="index.php" class="btn btn-outline-dark me-2 ms-5">Login</a>
+                        <a href="?page=login" class="btn btn-outline-dark me-2 ms-5">Login</a>
                         <a href="?page=register" class="btn btn-dark me-4">Sign-up</a>
                     <?php
                     endif;

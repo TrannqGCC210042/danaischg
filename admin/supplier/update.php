@@ -1,16 +1,18 @@
 <script>
+    // Function to check valid data
     function formValid() {
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
         var validname = /^[A-Za-z]+|(\s)$/;
-        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
         var phone_pattern = /^(\(0\d{1,3}\)\d{7})|(0\d{9,10})$/;
+
         f = document.formAddSupplier
+
         if (format.test(f.name.value)) {
             alert("Supplier name can't contain special character, please enter again");
             f.name.focus();
             return false;
         }
-        // Telephone validation
+
         if (phone_pattern.test(f.telephone.value) == false) {
             alert("Invalid phone number, please enter again");
             f.telephone.focus();
@@ -20,6 +22,7 @@
     }
 </script>
 <?php
+// Check the id exists on URL or not.
 if (isset($_GET['id'])) :
     $id = $_GET['id'];
 
@@ -28,21 +31,28 @@ if (isset($_GET['id'])) :
 
     $sql = "SELECT * FROM `supplier` WHERE id = ?";
 
-    $result = $dblink->prepare($sql);
-    $result->execute(array("$id"));
+    $stmt = $dblink->prepare($sql);
+    $stmt->execute(array("$id"));
 
-    $row = $result->fetch(PDO::FETCH_ASSOC);
+    // Check the id exists in DB or not.
+    if ($stmt->rowCount() > 0) :
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $sup_name = $row['name'];
+    else :
+        header("Location: ?page=supplier");
+    endif;
 
 ?>
     <section class="row">
+        <!-- Menu on the right -->
         <?php
         include_once 'admin/nav.php';
         ?>
 
         <div class="pt-3 col-lg-10 col-md-9 col-12">
-            <h1 class="text-center mb-4">Adding Supplier</h1>
+            <h1 class="text-center mb-4">Update Supplier</h1>
             <form id="formUpdateSupplier" name="formUpdateSupplier" method="POST" onsubmit="return formValid()">
-
+                <!-- Display information in update supplier table-->
                 <div class="form-group">
                     <label class="form-label font-weight-bold" for="Name">Supplier ID</label>
                     <input type="text" name="id" id="id" class="form-control" placeholder="" required readonly value="<?= $row['id'] ?>" />
@@ -72,26 +82,28 @@ if (isset($_GET['id'])) :
     </section>
 
 <?php
+    // Check if the user clicks the update button or not.
     if (isset($_POST['btnUpdate_supplier'])) :
-        $id = isset($_POST['id']) ? $_POST['id'] : "";
-        $name = isset($_POST['name']) ? $_POST['name'] : "";
-        $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
-        $address = isset($_POST['address']) ? $_POST['address'] : "";
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $telephone = $_POST['telephone'];
+        $address = $_POST['address'];
 
         $c = new Connect();
         $dblink = $c->connectToPDO();
         $sql = "UPDATE `supplier` SET `name`= ?,`phone`= ?,`address`= ? WHERE `id` = ?";
 
         $result = $dblink->prepare($sql);
-        $check = $result->execute(array("$name", "$telephone", "$address", "$id"));
+        $execute = $result->execute(array("$name", "$telephone", "$address", "$id"));
 
-        if ($check == true) :
-            echo "<meta http-equiv='refresh' content='0;url=?page=supplier'>";
+        if ($execute == true) :
+            header("Location: ?page=supplier");
         else :
-            echo "Failed!";
+            echo "Failed!" . $execute;
         endif;
+
     endif;
-else :
-    echo "<meta http-equiv='refresh' content='0;url=?page=supplier'>";
+else: 
+    header("Location: ?page=supplier");
 endif;
 ?>

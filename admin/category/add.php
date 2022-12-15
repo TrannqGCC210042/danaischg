@@ -1,7 +1,10 @@
 <script>
+    //  check valid data
     function formValid() {
-        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+        var format = /[!@#$%^&*()_+\=\[\]{};':"\\|<>\/?]+/;
+
         f = document.formAddcategory
+
         if (format.test(f.name.value)) {
             alert("Category name can't contain special character, please enter again");
             f.name.focus();

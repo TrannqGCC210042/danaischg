@@ -1,3 +1,7 @@
+<?php
+session_start();
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +37,8 @@
             include_once 'register.php';
         elseif ($page == "login") :
             include_once 'login.php';
-
+        elseif ($page == "logout") :
+            include_once 'logout.php';
         // Home
         elseif ($page == "product") :
             include_once 'product.php';
@@ -66,7 +71,7 @@
         elseif ($page == "updateProduct") :
             include_once 'admin/product/update.php';
         elseif ($page == "productImages") :
-            include_once 'admin/product/product_images.php';
+            include_once 'admin/product/pro_images.php';
 
         // Manament orderDetail
         elseif ($page == "orderDetail") :

@@ -107,17 +107,17 @@
                         while ($row = $re->fetch_assoc()) :
                         ?>
                             <tr>
-                                <td class="text-center align-middle"><?= $row['id']?></td>
-                                <td class="text-center align-middle"><?= $row['name']?></td>
-                                <td class="text-center align-middle"><?= $row['status']?></td>
-                                <td class="text-center align-middle"><a href="?page=pro_image&id=<?= $row['id']?>">See more >></a></td>
-                                <td class="text-center align-middle"><?= $row['description']?></td>
-                                <td class="text-center align-middle"><?= $row['price']?></td>
-                                <td class="text-center align-middle"><?= $row['for_gender']?></td>
-                                <td class="text-center align-middle"><?= $row['cate_id']?></td>
-                                <td class="text-center align-middle"><?= $row['sup_id']?></td>
+                                <td class="text-center align-middle"><?= $row['id'] ?></td>
+                                <td class="text-center align-middle"><?= $row['name'] ?></td>
+                                <td class="text-center align-middle"><?= $row['status'] ?></td>
+                                <td class="text-center align-middle"><img src="images/<?= $row['image'] ?>" alt="<?= $row['name'] ?>" height="100" width="70"></td>
+                                <td class="text-center align-middle"><?= $row['description'] ?></td>
+                                <td class="text-center align-middle"><?= $row['price'] ?></td>
+                                <td class="text-center align-middle"><?= $row['for_gender'] ?></td>
+                                <td class="text-center align-middle"><?= $row['cate_id'] ?></td>
+                                <td class="text-center align-middle"><?= $row['sup_id'] ?></td>
                                 <td class="text-center align-middle">
-                                    <a href="?page=updateproduct&cat_id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
+                                    <a href="?page=updateProduct&id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="?page=productManagement&id=<?= $row['id'] ?>" onclick="return deleteConfirm()"><i class="bi bi-trash-fill" style="color: red;"></i></a>
@@ -150,11 +150,19 @@
         $c = new Connect();
         $dblink = $c->connectToPDO();
 
+        $sql = "SELECT `image` FROM `product` WHERE id = ?";
+        $result = $dblink->prepare($sql);
+        $result->execute(array("$id"));
+        $rows = $result->fetch(PDO::FETCH_BOTH);
+
+        $img = $rows['image'];
+        echo $img;
+        unlink("images/" . $img);
+
         $sql = "DELETE FROM `product` WHERE id = ?";
         $result = $dblink->prepare($sql);
         $result->execute(array("$id"));
 
-        echo "<meta http-equiv='refresh' content='0;url=?page=productManagement'>";
-
+        header("Location: ?page=productManagement");
     endif;
     ?>

@@ -60,11 +60,11 @@
                 <table id="tableproduct" class="table table-striped table-bordered m-0" cellspacing="0" width="100%">
                     <thead class="justify-content-md-between justify-content-sm-center align-content-center border-bottom border-2 my-2 bg-dark text-light p-3 rounded-3">
                         <tr class="text-center">
-                            <th>
-                                <strong>Product Name</strong>
+                            <th width="30%">
+                                <strong>Images</strong>
                             </th>
                             <th>
-                                <strong>Images</strong>
+                                <strong>Product Name</strong>
                             </th>
                             <th>
                                 <strong>Edit</strong>
@@ -86,25 +86,26 @@
                         while ($row = $re->fetch_assoc()) :
                         ?>
                             <tr>
+                                <td class="text-center align-middle"><img src="images/<?= $row['file_name'] ?>" height="100" width="70" alt=""></td>
                                 <td class="text-center align-middle"><?= $row['name'] ?></td>
-                                <td class="text-center align-middle"><img src="images/<?=$row['file_name']?>" alt=""></td>
                                 <td class="text-center align-middle">
                                     <a href="?page=updateproduct&cat_id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a href="?page=productManagement&id=<?= $row['id'] ?>" onclick="return deleteConfirm()"><i class="bi bi-trash-fill" style="color: red;"></i></a>
+                                    <a href="?page=productManagement&function=del&id=<?= $row['id'] ?>" onclick="return deleteConfirm()"><i class="bi bi-trash-fill" style="color: red;"></i></a>
                                 </td>
                             </tr>
                         <?php
                         endwhile;
                         ?>
+                        
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
     <?php
-    if (isset($_GET['id'])) :
+    if (isset($_GET['id']) && isset($_GET['function']) == "del") :
         $id = $_GET['id'];
 
         $c = new Connect();

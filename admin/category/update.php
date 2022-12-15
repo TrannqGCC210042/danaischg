@@ -1,7 +1,10 @@
 <script>
+    // function to check valid data
     function formValid() {
-        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+        var format = /[!@#$%^&*()_+\=\[\]{};':"\\|<>\/?]+/;
+
         f = document.formUpdatecategory
+        
         if (format.test(f.name.value)) {
             alert("Category name can't contain special character, please enter again");
             f.name.focus();
@@ -15,19 +18,27 @@
         return true;
     }
 </script>
+
 <?php
-if (isset($_GET['cat_id'])) :
-    $id = $_GET['cat_id'];
+// Check the id exists on URL or not.
+if (isset($_GET['id'])) :
+    $id = $_GET['id'];
 
     $c = new Connect();
     $dblink = $c->connectToPDO();
 
     $sql = "SELECT * FROM `category` WHERE id = ?";
 
-    $result = $dblink->prepare($sql);
-    $result->execute(array("$id"));
+    $stmt = $dblink->prepare($sql);
+    $stmt->execute(array("$id"));
 
-    $row = $result->fetch(PDO::FETCH_ASSOC);
+    // Check the id exists in DB or not.
+    if ($stmt->rowCount() > 0) :
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $cate_name = $row['name'];
+    else :
+        header("Location: ?page=category");
+    endif;
 
 ?>
     <section class="row">
@@ -60,6 +71,7 @@ if (isset($_GET['cat_id'])) :
         </div>
     </section>
 <?php
+    // Check if the user clicks the update button or not.
     if (isset($_POST['btnUpdate_category'])) :
         $id = isset($_POST['id']) ? $_POST['id'] : "";
         $name = isset($_POST['name']) ? $_POST['name'] : "";
@@ -70,16 +82,16 @@ if (isset($_GET['cat_id'])) :
         $sql = "UPDATE `category` SET `name`= ?,`description`= ? WHERE `id` = ?";
 
         $result = $dblink->prepare($sql);
-        $check = $result->execute(array("$name", "$description", "$id"));
+        $execute = $result->execute(array("$name", "$description", "$id"));
 
-        if ($check == true) :
-            echo "<meta http-equiv='refresh' content='0;url=?page=category'>";
+        if ($execute == true) :
+            header("Location: ?page=category");
         else :
-            echo "Failed!";
+            echo "Failed!" . $execute;
         endif;
-    endif;
 
-else :
-    echo "<meta http-equiv='refresh' content='0;url=?page=category'>";
+    endif;
+else: 
+    header("Location: ?page=category");
 endif;
 ?>

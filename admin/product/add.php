@@ -84,7 +84,7 @@
                         <?php
                         endwhile;
                         ?>
-                        
+
                     </select>
                 </div>
             </div>
@@ -139,38 +139,38 @@
 
 <?php
 if (isset($_POST['btnAdd_product'])) :
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $status = $_POST['status'];
-    $description = $_POST['description'];
-    $images = $_FILES['file_image'];
-    $price = $_POST['price'];
-    $gender = $_POST['for_gender'];
-    $cate_id = $_POST['cat_id'];
-    $sup_id = $_POST['sup_id'];
-
-    echo $id;
-    echo $name;
-    echo $status;
-    echo $description;
-
-    echo $price;
-    echo $gender;
-    echo $cate_id;
-    echo $sup_id;
+    $images = str_replace(' ', '-', $_FILES['file_image']['name']);
+    // Save the path of the image.
+    $storedImage = "./images/";
+    // src
+    $flag = move_uploaded_file($_FILES['file_image']['tmp_name'], $storedImage . $images);
 
 
-    $c = new Connect();
-    $dblink = $c->connectToPDO();
-    $sql = "INSERT INTO `product`(`id`, `name`, `status`, `description`, `price`, `for_gender`, `cate_id`, `sup_id`) VALUES (?,? ,?, ?, ?,? ,?, ?)";
+    if ($flag) :
+        $c = new Connect();
+        $dblink = $c->connectToPDO();
 
-    $result = $dblink->prepare($sql);
-    $check = $result->execute(array("$id", "$name", $status, "$description", $price, "$gender", "$cate_id", "$sup_id"));
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $status = $_POST['status'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $gender = $_POST['for_gender'];
+        $cate_id = $_POST['cat_id'];
+        $sup_id = $_POST['sup_id'];
 
-    if ($check == true) :
-        echo "<meta http-equiv='refresh' content='0;url=?page=productManagement'>";
-    else :
-        echo "Failed!";
+
+        $sql_pro = "INSERT INTO `product`(`id`, `name`, `status`, `description`, `price`, `for_gender`, `image`, `cate_id`, `sup_id`) VALUES (?, ?, ? ,?, ?, ?,? ,?, ?)";
+
+        $re_pro = $dblink->prepare($sql_pro);
+
+        $check_pro = $re_pro->execute(array("$id", "$name", $status, "$description", $price, "$gender", "$images", "$cate_id", "$sup_id"));
+
+        if ($check_pro == true) :
+            echo "<meta http-equiv='refresh' content='0;url=?page=productManagement'>";
+        else :
+            echo "Failed!";
+        endif;
     endif;
 endif;
 ?>

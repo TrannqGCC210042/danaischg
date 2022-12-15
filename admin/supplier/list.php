@@ -3,8 +3,8 @@
     include_once 'admin/nav.php';
     ?>
 
-
     <script>
+        // Function to check if the user wants to delete or not.
         function deleteConfirm() {
             if (confirm("Are you sure to delete!")) {
                 return true;
@@ -54,25 +54,26 @@
 
                 <tbody class="justify-content-md-between justify-content-sm-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
                     <?php
+                    // Display the list of supplier
                     $c = new Connect();
                     $dblink = $c->connectToMySQL();
 
                     $sql = "SELECT * FROM `supplier`";
-                    $re = $dblink->query($sql);
+                    $stmt = $dblink->query($sql);
 
-                    while ($row = $re->fetch_assoc()) :
+                    while ($row = $stmt->fetch_assoc()) :
                     ?>
                         <tr>
-                            <td class="text-center align-middle"><?=$row['id']?></td>
-                            <td class="text-center align-middle"><?=$row['name']?></td>
-                            <td class="text-center align-middle"><?=$row['phone']?></td>
-                            <td class="align-middle"><?=$row['address']?></td>
+                            <td class="text-center align-middle"><?= $row['id'] ?></td>
+                            <td class="text-center align-middle"><?= $row['name'] ?></td>
+                            <td class="text-center align-middle"><?= $row['phone'] ?></td>
+                            <td class="align-middle"><?= $row['address'] ?></td>
 
                             <td class="text-center align-middle">
                                 <a href="?page=updateSupplier&id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
                             </td>
                             <td class="text-center align-middle">
-                            <a href="?page=supplier&id=<?= $row['id'] ?>" onclick="return deleteConfirm()"><i class="bi bi-trash-fill" style="color: red;"></i></a>
+                                <a href="?page=supplier&id=<?= $row['id'] ?>" onclick="return deleteConfirm()"><i class="bi bi-trash-fill" style="color: red;"></i></a>
                             </td>
                         </tr>
                     <?php
@@ -84,17 +85,20 @@
     </div>
 </section>
 <?php
-if(isset($_GET['id'])):
+$c = new Connect();
+$dblink = $c->connectToPDO();
+
+// Delete a data
+if (isset($_GET['id'])) :
+
     $id = $_GET['id'];
+    $sqlSelect = "DELETE FROM `supplier` WHERE `id` = ?";
+    $stmt = $dblink->prepare($sqlSelect);
+    $execute = $stmt->execute(array("$id"));
 
-    $c = new Connect();
-    $dblink = $c->connectToPDO();
-
-    $sql = "DELETE FROM `supplier` WHERE `id` = ?";
-    $result = $dblink->prepare($sql);
-    $result->execute(array("$id"));
-
-    echo "<meta http-equiv='refresh' content='0;url=?page=supplier'>";
-
+    if($execute):
+        header("Location: ?page=supplier");
+    endif;
+        echo "Failed".$execute;
 endif;
 ?>

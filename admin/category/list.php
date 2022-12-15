@@ -64,7 +64,7 @@
                             <td class="align-middle"><?= $row['description'] ?></td>
 
                         <td class="text-center align-middle">
-                                <a href="?page=updateCategory&cat_id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
+                                <a href="?page=updateCategory&id=<?= $row['id'] ?>"><i class="bi bi-pen-fill" style="color: black;"></i></a>
                             </td>
 
                             <td class="text-center align-middle">

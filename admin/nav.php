@@ -34,11 +34,7 @@
                     management</a>
                 <a href="?page=supplier" class="list-group-item list-group-item-action py-4 text-light">Supplier
                     management</a>
-                <a href="demo.php" class="list-group-item list-group-item-action py-4 text-light">Product
-                    management</a>
-                <a href="?page=productManagement" class="list-group-item list-group-item-action py-4 text-light">Size
-                    management</a>
-                <a href="?page=productManagement" class="list-group-item list-group-item-action py-4 text-light">Size Details
+                <a href="?page=productManagement" class="list-group-item list-group-item-action py-4 text-light">Product
                     management</a>
             </div>
         </div>

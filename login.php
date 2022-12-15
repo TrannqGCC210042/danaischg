@@ -11,7 +11,39 @@
 
     <!-- Main CSS-->
     <link href="css/register-login.css" rel="stylesheet" media="all">
+    <?php
+    if (isset($_POST['btnLogin'])) :
+        if (isset($_POST['username']) && isset($_POST['password'])) :
+            $username = $_POST['username'];
+            $password = $_POST['password'];
 
+            $c = new Connect();
+            $dblink = $c->connectToPDO();
+            $sql = "SELECT * FROM `user` WHERE username = ? AND password = ?";
+
+            $stmt = $dblink->prepare($sql);
+            $check = $stmt->execute(array("$username", "$password"));
+            $numrow = $stmt->rowCount();
+            $row = $stmt->fetch(PDO::FETCH_BOTH);
+
+            if ($numrow == 1) :
+                // echo "Ok";
+                $_SESSION["username"] = $row['username'];
+                $_SESSION["role"] = $row['role'];
+              
+                // setcookie("username", $row['username'],time()+30);
+                // setcookie("role", $row['role'],time()+30);
+
+                header("Location: index.php");
+                // echo "<meta http-equiv='refresh' content='0;url=index.php'>";
+            else :
+                echo "Sai rồi má!";
+            endif;
+        else :
+            echo "Đăng ký đi bà";
+        endif;
+    endif;
+    ?>
     <div class="page-wrapper p-t-50 font-robo">
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
@@ -34,7 +66,7 @@
     </div>
 
     <?php
-    if(isset($_POST['btnLogin'])):
+    if (isset($_POST['btnLogin'])) :
         $username = $_POST['username'];
         $password = $_POST['password'];
 
@@ -44,8 +76,8 @@
 
         $result = $dblink->prepare($sql);
         $check = $result->execute(array("$username", "$password"));
-        
-        if($check):
+
+        if ($check) :
             $row = $result->fetch(PDO::FETCH_ASSOC);
             $_COOKIE['username'] = $row['username'];
         endif;
