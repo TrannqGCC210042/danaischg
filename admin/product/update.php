@@ -190,6 +190,11 @@ if (isset($_GET['id'])) :
                 </div>
 
                 <div class="form-group mt-3">
+                    <label class="form-label font-weight-bold" for="Price">Quantity</label>
+                    <input type="number" name="quantity" id="quantity" min="1" class="form-control" placeholder="" required value="<?= $row['quantity'] ?>" />
+                </div>
+
+                <div class="form-group mt-3">
                     <label class="form-label font-weight-bold" for="description">Description </label>
                     <textarea name="description" id="description" class="form-control" placeholder="" rows="10" required><?= $row['description'] ?></textarea>
                 </div>
@@ -199,11 +204,11 @@ if (isset($_GET['id'])) :
                     <br>
                     <img src="images/<?= $row['image'] ?>" alt="" class="mb-3" height="150" width="100">
                     <br>
-                    <input type="file" name="file_image" id="Image" class="form-control-file" required />
+                    <input type="file" name="file_image" id="Image" class="form-control-file" />
                 </div>
 
                 <div class="form-group text-center mt-4 mt-3">
-                    <input type="submit" class="btn btn-dark" name="btnAdd_product" value="Add new" />
+                    <input type="submit" class="btn btn-dark" name="btnUpdate_product" value="Update" />
                     <input type="button" class="btn btn-dark" name="btnCacel_product" value="Cancel" onclick="window.location='?page=productManagement'" />
                 </div>
             </form>
@@ -212,26 +217,37 @@ if (isset($_GET['id'])) :
 
 <?php
     // Check if the user clicks the update button or not.
-    if (isset($_POST['btnAdd_product'])) :
+    if (isset($_POST['btnUpdate_product'])) :
         $id = $_POST['id'];
         $name = $_POST['name'];
         $status = $_POST['status'];
         $description = $_POST['description'];
         $price = $_POST['price'];
+        $quantity = $_POST['quantity'];
         $gender = $_POST['for_gender'];
         $cate_id = $_POST['cat_id'];
         $sup_id = $_POST['sup_id'];
 
-        $img = str_replace('', '-', $_FILES['file_image']['image']);
-        $storedImage = "./images/"; //Chỗ lưu đường dẫn hình ảnh
-        $flag = move_uploaded_file($_FILES['file_image']['tmp_image'], $storedImage . $img);
-
         $c = new Connect();
         $dblink = $c->connectToPDO();
-        $sql = "UPDATE `product` SET `name`= ?,`status`= ?',`description`= ?',`price`= ?,`for_gender`= ?,`cate_id`= ?,`sup_id`= ? WHERE `id`= ?";
 
-        $result = $dblink->prepare($sql);
-        $execute = $result->execute(array("$name", "$status", "$description", "$price", "$for_gender", "$cate_id", "$sup_id", "$id"));
+        if ($_FILES['file_image']['name']) :
+            $img = str_replace('', '-', $_FILES['file_image']['name']);
+            $storedImage = "./images/";
+            $flag = move_uploaded_file($_FILES['file_image']['tmp_name'], $storedImage . $img);
+
+            $sql = "UPDATE `product` SET `name`= ?,`status`= ?',`description`= ?',`price`= ?,`for_gender`= ?,`quantity`= ?, `image` =?, cate_id`= ?,`sup_id`= ? WHERE `id`= ?";
+
+            $result = $dblink->prepare($sql);
+            $execute = $result->execute(array("$name", "$status", "$description", "$price", "$gender", "$quantity", "$img", "$cate_id", "$sup_id", "$id"));
+        else :
+            $sql = "UPDATE `product` SET `name`= ?,`status`= ?',`description`= ?',`price`= ?,`for_gender`= ?,`quantity`= ?,`cate_id`= ?,`sup_id`= ? WHERE `id`= ?";
+
+            $result = $dblink->prepare($sql);
+            $execute = $result->execute(array("$name", $status, "$description", $price, "$gender", "$quantity", "$cate_id", "$sup_id", "$id"));
+        endif;
+
+
 
         if ($execute == true) :
             header("Location: ?page=productManagement");

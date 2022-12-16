@@ -41,7 +41,7 @@ ob_start();
             include_once 'logout.php';
         // Home
         elseif ($page == "product") :
-            include_once 'product.php';
+            include_once 'allProduct.php';
 
         // Admin page
         elseif ($page == "order") :
@@ -80,6 +80,15 @@ ob_start();
             include_once 'admin/orderDetail/add.php';
         elseif ($page == "updateOrderDetail") :
             include_once 'admin/orderDetail/update.php';
+        // shoppingcart
+        elseif ($page == "shoppingcart") :
+            include_once 'shoppingCart.php';
+        // shoppingcart
+        elseif ($page == "productForMen") :
+            include_once 'productForMen.php';
+        // shoppingcart
+        elseif ($page == "cartDetail") :
+            include_once 'cartDetail.php';
 
         endif;
     else :
@@ -88,6 +97,7 @@ ob_start();
 
     // include_once 'productCart.php';
     include_once 'footer.php';
+
     ?>
 
 

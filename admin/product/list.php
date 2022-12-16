@@ -79,6 +79,9 @@
                                 <strong>Price</strong>
                             </th>
                             <th>
+                                <strong>Quantity</strong>
+                            </th>
+                            <th>
                                 <strong>Gender</strong>
                             </th>
                             <th>
@@ -113,6 +116,7 @@
                                 <td class="text-center align-middle"><img src="images/<?= $row['image'] ?>" alt="<?= $row['name'] ?>" height="100" width="70"></td>
                                 <td class="text-center align-middle"><?= $row['description'] ?></td>
                                 <td class="text-center align-middle"><?= $row['price'] ?></td>
+                                <td class="text-center align-middle"><?= $row['quantity'] ?></td>
                                 <td class="text-center align-middle"><?= $row['for_gender'] ?></td>
                                 <td class="text-center align-middle"><?= $row['cate_id'] ?></td>
                                 <td class="text-center align-middle"><?= $row['sup_id'] ?></td>

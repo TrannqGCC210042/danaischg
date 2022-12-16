@@ -21,6 +21,7 @@
         return true;
     }
 </script>
+
 <?php
 // Check the id exists on URL or not.
 if (isset($_GET['id'])) :

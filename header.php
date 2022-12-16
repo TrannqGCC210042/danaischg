@@ -10,13 +10,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Left element -->
-            <div class="d-flex ms-4">
+            <form action="?page=product" method="POST" class="d-flex ms-4">
                 <!-- Search -->
-                <input type="text" class="form-control rounded me-2" placeholder="search..." aria-label="search" aria-describedby="search-addon" />
-                <span class="input-group-text border-0" id="search-addon">
+                <input type="text" class="form-control rounded me-2" name="searchValue" placeholder="search..." aria-label="search" aria-describedby="search-addon" />
+                <button type="submit" name="btnSearch" class="input-group-text border-0">
                     <i class="fas fa-search"></i>
-                </span>
-            </div>
+                </button>
+            </form>
             <!-- collapse: thu ra thu vào -->
             <div class="collapse navbar-collapse header" id="navbarMain">
                 <!-- Menu bar -->
@@ -25,41 +25,44 @@
                     <a class="nav-link" href="index.php">Home</a>
                     <a class="nav-link" href="?page=product">Product</a>
                     <div class="dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Women</a>
+                        <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Women</a>
                         <div class="dropdown-menu">
                             <?php
                             $c = new Connect();
                             $dblink = $c->connectToMySQL();
 
-                            $sql = "SELECT c.id as cat_id, c.name as cat_name FROM `category` AS c join product as p ON c.id = p.cate_id WHERE p.for_gender = 1";
+                            // Display all category on women
+                            $sql = "SELECT c.id as cate_id, c.name as cat_name, p.for_gender as for_gender FROM `category` c JOIN product p ON c.id = p.cate_id WHERE p.for_gender = 1 GROUP BY c.id";
                             $re = $dblink->query($sql);
+                            
                             while ($row = $re->fetch_assoc()) :
                             ?>
-                                <a class="dropdown-item" href="?page=product&cat_id=<?= $row['cat_id'] ?>"><?= $row['cat_name'] ?></a>
+                                <a class="dropdown-item" href="?page=product&id=<?= $row['cate_id'] ?>&gender=<?= $row['for_gender'] ?>"><?= $row['cat_name'] ?></a>
                             <?php
                             endwhile;
                             ?>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Men</a>
-                        
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" onclick="document.write(productForMen)">Men</a>
                         <div class="dropdown-menu">
-                            <?php
-                            $c = new Connect();
-                            $dblink = $c->connectToMySQL();
-                            $sql = "SELECT c.id as cat_id, c.name as cat_name FROM `category` AS c join product as p ON c.id = p.cate_id WHERE p.for_gender = 0";
-                            $re = $dblink->query($sql);
-                            while ($row = $re->fetch_assoc()) :
-                            ?>
-                                <a class="dropdown-item" href="?page=product&cat_id=<?= $row['cat_id'] ?>"><?= $row['cat_name'] ?></a>
-                            <?php
-                            endwhile;
-                            ?>
+                            <form action="allProduct&cat_id=" method="get">
+                                <?php
+                                $c = new Connect();
+                                $dblink = $c->connectToMySQL();
+
+                                // Display all category on men
+                                $sql = "SELECT c.name as cat_name, c.id as cat_id, p.id as pro_id, p.for_gender as for_gender FROM `product` p JOIN `category` c ON c.id = p.cate_id WHERE p.for_gender = 0 and p.cate_id = c.id GROUP BY c.id";
+                                $re = $dblink->query($sql);
+                                while ($row = $re->fetch_assoc()) :
+                                ?>
+                                    <a class="dropdown-item" href="?page=product&id=<?= $row['cat_id'] ?>&gender=<?= $row['for_gender'] ?>"><?= $row['cat_name'] ?></a>
+                                <?php
+                                endwhile;
+                                ?>
+                            </form>
                         </div>
                     </div>
-                    <!-- <a class="nav-link" href="#">Delivery</a>
-                    <a class="nav-link" href="#">Support</a> -->
                 </div>
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
@@ -68,7 +71,7 @@
                     if (isset($_SESSION['username'])) :
                     ?>
                         <!-- Icon -->
-                        <a class="text-reset me-3" href="#">
+                        <a class="text-reset me-3" href="?page=shoppingcart">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                         <!-- Avatar -->

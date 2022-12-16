@@ -120,6 +120,11 @@
             </div>
 
             <div class="form-group mt-3">
+                <label class="form-label font-weight-bold" for="Price">Quantity</label>
+                <input type="number" name="quantity" id="quantity" min="1" class="form-control" placeholder="" required />
+            </div>
+
+            <div class="form-group mt-3">
                 <label class="form-label font-weight-bold" for="description">Description </label>
                 <textarea name="description" id="description" class="form-control" placeholder="" rows="10" required></textarea>
             </div>
@@ -155,16 +160,17 @@ if (isset($_POST['btnAdd_product'])) :
         $status = $_POST['status'];
         $description = $_POST['description'];
         $price = $_POST['price'];
+        $quantity = $_POST['quantity'];
         $gender = $_POST['for_gender'];
         $cate_id = $_POST['cat_id'];
         $sup_id = $_POST['sup_id'];
 
 
-        $sql_pro = "INSERT INTO `product`(`id`, `name`, `status`, `description`, `price`, `for_gender`, `image`, `cate_id`, `sup_id`) VALUES (?, ?, ? ,?, ?, ?,? ,?, ?)";
+        $sql_pro = "INSERT INTO `product`(`id`, `name`, `status`, `description`, `price`, `for_gender`. `quantity`, `image`, `cate_id`, `sup_id`) VALUES (?, ?, ?, ? ,?, ?, ?,? ,?, ?)";
 
         $re_pro = $dblink->prepare($sql_pro);
 
-        $check_pro = $re_pro->execute(array("$id", "$name", $status, "$description", $price, "$gender", "$images", "$cate_id", "$sup_id"));
+        $check_pro = $re_pro->execute(array("$id", "$name", $status, "$description", $price, "$gender", "$quantity", "$images", "$cate_id", "$sup_id"));
 
         if ($check_pro == true) :
             echo "<meta http-equiv='refresh' content='0;url=?page=productManagement'>";
