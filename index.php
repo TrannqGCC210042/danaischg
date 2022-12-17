@@ -39,6 +39,8 @@ ob_start();
             include_once 'login.php';
         elseif ($page == "logout") :
             include_once 'logout.php';
+        elseif ($page == "profile") :
+            include_once 'profile.php';
         // Home
         elseif ($page == "product") :
             include_once 'allProduct.php';
@@ -70,8 +72,6 @@ ob_start();
             include_once 'admin/product/add.php';
         elseif ($page == "updateProduct") :
             include_once 'admin/product/update.php';
-        elseif ($page == "productImages") :
-            include_once 'admin/product/pro_images.php';
 
         // Manament orderDetail
         elseif ($page == "orderDetail") :
@@ -80,16 +80,16 @@ ob_start();
             include_once 'admin/orderDetail/add.php';
         elseif ($page == "updateOrderDetail") :
             include_once 'admin/orderDetail/update.php';
+
+        // cartDetail
+        elseif ($page == "cartDetail") :
+            include_once 'cartDetail.php';
         // shoppingcart
         elseif ($page == "shoppingcart") :
             include_once 'shoppingCart.php';
-        // shoppingcart
-        elseif ($page == "productForMen") :
-            include_once 'productForMen.php';
-        // shoppingcart
-        elseif ($page == "cartDetail") :
-            include_once 'cartDetail.php';
-
+        // payment
+        elseif ($page == "payment") :
+            include_once 'payment.php';
         endif;
     else :
         include_once 'home.php';

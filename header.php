@@ -82,7 +82,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdownMenuAccount">
                                 <li>
-                                    <a href="?page=index.php" class="dropdown-item">Profile</a>
+                                    <a href="?page=profile" class="dropdown-item">Profile</a>
                                 </li>
                                 <li>
                                     <a href="?page=logout">

@@ -38,7 +38,6 @@ if (isset($_GET['id'])) :
     // Check the id exists in DB or not.
     if ($stmt->rowCount() > 0) :
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $sup_name = $row['name'];
     else :
         header("Location: ?page=supplier");
     endif;

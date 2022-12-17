@@ -1,7 +1,6 @@
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="css/cardProduct.css" rel="stylesheet" media="all">
-    <!-- <link href="css/register-login.css" rel="stylesheet" media="all"> -->
 
     <!-- Title and Sort By -->
     <div class="page-wrapper font-robo row d-flex">
@@ -55,6 +54,7 @@
                                 $sql = "SELECT * FROM `product` ORDER BY price DESC";
                             endif;
                         endif;
+                    // Search
                     elseif (isset($_POST['btnSearch'])) :
                         $searchValue = $_POST['searchValue'];
                         $keyword = explode(' ', $searchValue);
@@ -64,7 +64,7 @@
                             $searchTermByKeyword[] = "name LIKE '%$word%'";
                         endforeach;
 
-                        $sql = "SELECT * FROM `product` WHERE ".implode('AND ', $searchTermByKeyword);
+                        $sql = "SELECT * FROM `product` WHERE " . implode('AND ', $searchTermByKeyword);
                     else :
                         $sql = "SELECT * FROM product";
                     endif;
@@ -87,8 +87,8 @@
                                         </ul>
                                         <form action="?page=shoppingcart" method="POST">
                                             <input type="hidden" name="pro_id" value="<?= $row['id'] ?>">
-                                            <input type="hidden" name="pro_name" value="<?= $row['quantity'] ?>" />
-                                            <input type="submit" class="add-to-cart fw-bold" name="btnAddtoCart" value="Add to Cart" />
+                                            <input type="hidden" name="pro_quantity" value="1" />
+                                            <input type="submit" class="add-to-cart fw-bold" name="btn_AddtoCart" value="Add to Cart" />
                                         </form>
 
                                     </div>
@@ -98,7 +98,6 @@
                                     </div>
                                 </div>
                             </div>
-
                     <?php
                         endwhile;
                     else :

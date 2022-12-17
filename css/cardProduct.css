@@ -142,6 +142,7 @@
 .product-grid .add-to-cart:hover {
     background: rgb(186, 186, 186);
     text-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+    border: rgb(186, 186, 186);
 }
 
 .product-grid .product-content {

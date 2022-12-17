@@ -59,7 +59,7 @@
                     $dblink = $c->connectToMySQL();
 
                     $sql = "SELECT * FROM `supplier`";
-                    $stmt = $dblink->query($sql);
+                    $stmt = $dblink->query($sql);       
 
                     while ($row = $stmt->fetch_assoc()) :
                     ?>

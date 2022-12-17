@@ -11,52 +11,91 @@
 
     <!-- Main CSS-->
     <link href="css/register-login.css" rel="stylesheet" media="all">
+
+    <script>
+        // Function to check valid data
+        function formValid() {
+            var pw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+            f = document.formLogin
+
+            if (f.username.value.length > 10) {
+                alert("The username must be less than 10 characters");
+                f.username.focus();
+                return false;
+            }
+            if (pw.test(f.password.value)) {
+                alert("Invalid! Password must be at least eight characters, one letter, and one number");
+                f.password.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+
     <?php
+    $errLogin = "";
+
     if (isset($_POST['btnLogin'])) :
-        if (isset($_POST['username']) && isset($_POST['password'])) :
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+        // if (isset($_POST['username']) && isset($_POST['password'])) :
 
-            $c = new Connect();
-            $dblink = $c->connectToPDO();
-            $sql = "SELECT * FROM `user` WHERE username = ? AND password = ?";
+        // else :  
+        //     echo "Register";
+        // endif;
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-            $stmt = $dblink->prepare($sql);
-            $check = $stmt->execute(array("$username", "$password"));
-            $numrow = $stmt->rowCount();
-            $row = $stmt->fetch(PDO::FETCH_BOTH);
+        $c = new Connect();
+        $dblink = $c->connectToPDO();
+        $sql = "SELECT * FROM `user` WHERE username = ? AND password = ?";
 
-            if ($numrow == 1) :
-                // echo "Ok";
-                $_SESSION["username"] = $row['username'];
-                $_SESSION["role"] = $row['role'];
-              
-                // setcookie("username", $row['username'],time()+30);
-                // setcookie("role", $row['role'],time()+30);
+        $stmt = $dblink->prepare($sql);
+        $check = $stmt->execute(array("$username", "$password"));
+        $numrow = $stmt->rowCount();
+        $row = $stmt->fetch(PDO::FETCH_BOTH);
 
-                header("Location: index.php");
-                // echo "<meta http-equiv='refresh' content='0;url=index.php'>";
-            else :
-                echo "Sai rồi má!";
-            endif;
+        if ($numrow == 1) :
+            $_SESSION["username"] = $row['username'];
+            $_SESSION["firstName"] = $row['firstName'];
+            $_SESSION["lastName"] = $row['lastName'];
+            $_SESSION["address"] = $row['address'];
+            $_SESSION["telephone"] = $row['telephone'];
+
+            $_SESSION["role"] = $row['role'];
+
+
+            header("Location: index.php");
         else :
-            echo "Đăng ký đi bà";
+            $errLogin = "Username or password is incorrect!";
         endif;
     endif;
     ?>
+
     <div class="page-wrapper p-t-50 font-robo">
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
                 <div class="card-body">
                     <h2 class="title fw-bold text-center">Login</h2>
-                    <form method="POST">
+                    <form method="POST" name="formLogin" onclick="return formValid()">
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="USERNAME" name="username">
+                            <input class="input--style-1" type="text" placeholder="USERNAME" name="username" value="<?= isset($_POST['username']) ? $_POST['username'] : "" ?>" required>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-1" type="password" placeholder="PASSWORD" name="password">
+                            <input class="input--style-1" type="password" placeholder="PASSWORD" name="password" required>
                         </div>
-                        <div class="p-t-20">
+                        <div class="input--style-1 text-center">
+                            <p>You don't have an account yet? <a href="?page=register">Registration</a></p>
+                        </div>
+                        <?php
+                        if ($errLogin != "") :
+                        ?>
+                            <div class="text-center">
+                                <span class="text-danger"><?= $errLogin ?></span>
+                            </div>
+                        <?php
+                        endif;
+                        ?>
+                        <div class="login text-center">
                             <button class="btn-click btn--radius btn--black" type="submit" name="btnLogin">Login</button>
                         </div>
                     </form>
@@ -64,22 +103,3 @@
             </div>
         </div>
     </div>
-
-    <?php
-    if (isset($_POST['btnLogin'])) :
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $c = new Connect();
-        $dblink = $c->connectToPDO();
-        $sql = "SELECT * FROM `user` WHERE `username` = ? AND `password` = ?";
-
-        $result = $dblink->prepare($sql);
-        $check = $result->execute(array("$username", "$password"));
-
-        if ($check) :
-            $row = $result->fetch(PDO::FETCH_ASSOC);
-            $_COOKIE['username'] = $row['username'];
-        endif;
-    endif;
-    ?>

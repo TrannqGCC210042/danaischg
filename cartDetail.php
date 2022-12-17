@@ -66,12 +66,11 @@ endif;
             //<1>
             $result = $dblink->query($sql);
             $row1 = $result->fetch_row();
-            // $row1[5];
+
             $result->data_seek(0);
 
             if ($result->num_rows > 0) :
                 while ($row = $result->fetch_assoc()) :
-
             ?>
                     <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                         <div class="product-grid">
@@ -85,7 +84,7 @@ endif;
                                     <li><a href="#"><i class="fa fa-random"></i></a></li>
                                 </ul>
                                 <form action="?page=shoppingcart" method="POST">
-                                    <input type="hidden" name="pro_id" value="<?= $row['id'] ?>">
+                                    
 
                                     <input type="submit" class="add-to-cart fw-bold" name="btnAddtoCart" value="Add to Cart" />
                                 </form>
@@ -110,10 +109,7 @@ endif;
 <?php
 if(isset($_GET['btnAddtoCart'])):
     $id = $_POST['id'];
-    $name = $_POST['name'];
-    $telephone = $_POST['telephone'];
-    $address = $_POST['address'];
-
+    
     $c = new Connect();
     $dblink = $c->connectToPDO();
     $sql = "INSERT INTO `supplier`(`id`, `name`, `phone`, `address`) VALUES (?, ?, ?, ?)";

@@ -149,7 +149,7 @@ if (isset($_POST['btnAdd_product'])) :
     $storedImage = "./images/";
     // src
     $flag = move_uploaded_file($_FILES['file_image']['tmp_name'], $storedImage . $images);
-
+    
 
     if ($flag) :
         $c = new Connect();
