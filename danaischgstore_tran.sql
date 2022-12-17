@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2022 at 02:55 PM
+-- Generation Time: Dec 17, 2022 at 05:46 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.0.23
 
@@ -29,10 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart` (
   `cart_id` int(11) NOT NULL,
-  `username` varchar(18) NOT NULL,
+  `username` varchar(10) NOT NULL,
   `pid` varchar(10) NOT NULL,
   `pcount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `username`, `pid`, `pcount`) VALUES
+(20, 'trannq', 'P01', 1),
+(25, 'trannq', 'P04', 2);
 
 -- --------------------------------------------------------
 
@@ -76,6 +84,14 @@ CREATE TABLE `order` (
   `username` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`id`, `date`, `delivery_date`, `delivery_local`, `cust_name`, `cust_phone`, `total`, `status`, `username`) VALUES
+(5, '2022-12-17 14:55:07', '2022-12-17 14:55:07', 'Spain', 'Herdsman Turtleneck', '0916843367', '114', 0, 'trannq'),
+(6, '2022-12-17 16:59:40', '2022-12-17 16:59:40', 'CanTho', 'tran@0903', '0916843763', '114', 0, 'trannq');
+
 -- --------------------------------------------------------
 
 --
@@ -87,6 +103,14 @@ CREATE TABLE `orderdetail` (
   `pro_id` varchar(10) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orderdetail`
+--
+
+INSERT INTO `orderdetail` (`order_id`, `pro_id`, `quantity`) VALUES
+(5, 'P04', 1),
+(6, 'P02', 3);
 
 -- --------------------------------------------------------
 
@@ -140,6 +164,7 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id`, `name`, `phone`, `address`) VALUES
+('P02', '', '', ''),
 ('SP01', 'Dear Róe', '0843630939', 'VietNam'),
 ('SP02', 'Chanel', '0978253689', 'America'),
 ('SP03', 'Mende', '09878546253', 'VietNam'),
@@ -152,7 +177,7 @@ INSERT INTO `supplier` (`id`, `name`, `phone`, `address`) VALUES
 --
 
 CREATE TABLE `user` (
-  `username` varchar(18) NOT NULL,
+  `username` varchar(10) NOT NULL,
   `password` varchar(50) NOT NULL,
   `firstName` varchar(20) NOT NULL,
   `lastName` varchar(30) NOT NULL,
@@ -169,8 +194,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `gender`, `birthday`, `telephone`, `email`, `address`, `role`) VALUES
-('quies_09', '123', 'Nguyen', 'Tran', 1, '2022-01-12', '0843630939', 'trannqgcc210042@fpt.edu.vn', 'Cantho', 0),
-('tran@0903', '111', 'Nguyen', 'Que Tran', 1, '2022-01-12', '0843630939', 'trannqgcc210042@fpt.edu.vn', 'Cantho', 0);
+('trannq', '123', 'Herdsman', 'Turtleneck', 1, '2022-01-12', '0916843367', 'trannqgcc210042@fpt.edu.vn', 'Spain', 0);
 
 --
 -- Indexes for dumped tables
@@ -180,7 +204,9 @@ INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `gender`, `
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cart_id`);
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `pid` (`pid`),
+  ADD KEY `username` (`username`);
 
 --
 -- Indexes for table `category`
@@ -231,17 +257,24 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_3` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `order`
