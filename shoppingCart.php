@@ -1,5 +1,16 @@
 <link href="css/shoppingCart.css" rel="stylesheet" media="all">
 
+<script>
+    // Function to check if the user wants to delete or not.
+    function deleteConfirm() {
+        if (confirm("Are you sure to delete!")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
 <section class="py-2 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12">
@@ -23,16 +34,18 @@
                                 $result->execute(array("$id", "$user"));
                                 $row_cart = $result->fetch(PDO::FETCH_ASSOC);
 
+                                echo $result->rowCount();
                                 // Check the exists in Cart on DB or not.
                                 if ($result->rowCount() > 0) :
-                                    $update_quantity = $row_cart['pcount'] + $qty;
+
+                                    // $update_quantity = $row_cart['pcount'] + $qty;
                                     $sql_updateQty = "UPDATE `cart` SET `pcount`= ? WHERE pid = ? AND username = ?";
 
                                     $pro_qty = $dblink->prepare($sql_updateQty);
-                                    $pro_qty->execute(array("$update_quantity", "$id", "$user"));
+                                    $pro_qty->execute(array($update_quantity, "$id", "$user"));
 
                                     if ($pro_qty == true) :
-                                        header("Location: ?page=shoppingCart");
+                                        header("Location: ?page=shoppingcart");
                                     else :
                                         echo "Failed!" . $pro_qty;
                                     endif;
@@ -44,7 +57,6 @@
                                 endif;
                             endif;
                         endif;
-
                         ?>
                         <div class="col-lg-8">
                             <div class="p-5">
@@ -69,33 +81,53 @@
 
                                     foreach ($row as $r) :
                                 ?>
-                                        <hr class="my-4">
-                                        <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                            <div class="col-md-2 col-lg-2 col-xl-2">
-                                                <img src="images/<?= $r['pro_image'] ?>" class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                            </div>
-                                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                                <h6 class="text-muted"><?= $r['cat_name'] ?></h6>
-                                                <h6 class="text-black mb-0"></h6><?= $r['pro_name'] ?></h6>
-                                            </div>
-                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
+                                        <form method="get">
+                                            <hr class="my-4">
+                                            <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                    <img src="images/<?= $r['pro_image'] ?>" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                                    <h6 class="text-muted"><?= $r['cat_name'] ?></h6>
+                                                    <h6 class="text-black mb-0"></h6><?= $r['pro_name'] ?></h6>
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                    <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
 
-                                                <input id="form1" min="0" name="quantity" value="<?= $r['quantity'] ?>" type="number" class="form-control form-control-sm" />
+                                                    <input id="form1" min="0" name="quantity" value="<?= $r['quantity'] ?>" type="number" class="form-control form-control-sm" />
 
-                                                <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
+                                                    <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                    <h6 class="mb-0">$<?= $r['price'] * $r['quantity'] ?></h6>
+                                                </div>
+                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                    <a href="?page=shoppingcart&function=del&id=<?= $r['[pro_id'] ?>" onclick="return deleteConfirm()" class="text-muted"><i class="fas fa-times"></i></a>
+                                                </div>
+                                                <?php
+                                               $c = new Connect();
+                                               $dblink = $c->connectToPDO();
+                                               
+                                               // Delete a data
+                                               if (isset($_GET['pro_id'])) :
+                                               
+                                                   $id = $_GET['pro_id'];
+                                                   $sqlSelect = "DELETE FROM `supplier` WHERE `id` = ?";
+                                                   $stmt = $dblink->prepare($sqlSelect);
+                                                   $execute = $stmt->execute(array("$id"));
+                                               
+                                                   if($execute):
+                                                       header("Location: ?page=supplier");
+                                                   endif;
+                                                       echo "Failed".$execute;
+                                               endif;
+                                               ?>
                                             </div>
-                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                <h6 class="mb-0">$<?= $r['price'] * $r['quantity'] ?></h6>
-                                            </div>
-                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                                            </div>
-                                        </div>
+                                        </form>
                                     <?php
                                         $total += $r['price'] * $r['quantity'];
                                     endforeach;

@@ -81,12 +81,21 @@ if (isset($_POST['btnPayment'])) :
 
     $c = new Connect();
     $dblink = $c->connectToPDO();
-    $sql = "INSERT INTO `order`(`date`, `delivery_date`, `delivery_local`, `cust_name`, `cust_phone`, `total`, `status`, `username`) VALUES ( ?, ?, ?, ?, ?, ?, 0, ?)";
+    $sql_order = "INSERT INTO `order`(`date`, `delivery_date`, `delivery_local`, `cust_name`, `cust_phone`, `total`, `status`, `username`) VALUES ( ?, ?, ?, ?, ?, ?, 0, ?)";
 
-    $result = $dblink->prepare($sql);
+    $result = $dblink->prepare($sql_order);
     $check = $result->execute(array("$now", "$now", "$address", "$name", "$telephone", "$total", "$user"));
 
+    $sql_updatePro = "UPDATE `product` SET `quantity`= ? WHERE id = ?";
+
     if ($check == true) :
+        $sql_updatePro = "UPDATE `product` SET `quantity`= ? WHERE id = ?";
+        $update->execute(array("$now", "$now", "$address", "$name", "$telephone", "$total", "$user"));
+
+        // $sql_orderDetail = "SELECT p.id, o.id, p.quantity FROM  `orderdetail` od JOIN  `order` o ON o.id = od.order_id
+        // JOIN `product` p ON p.id = od.pro_id
+        // WHERE o.id = (SELECT id FROM `order` WHERE delivery_date = (SELECT MAX(delivery_date) FROM `order`))";
+
         header("Location: ?page=shoppingcart");
     else :
         echo "Failed!";
