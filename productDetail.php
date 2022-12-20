@@ -39,13 +39,14 @@ if (isset($_GET['pro_id'])) :
                     <span>$<?= $row['price'] ?></span>
                 </div>
                 <p class="lead"><?= $row['description'] ?></p>
-                <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 4rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                <form action="?page=shoppingcart" method="POST" class="d-flex">
+                    <input type="hidden" name="pro_id" value="<?= $row['id'] ?>">
+                    <input class="form-control text-center me-3" id="inputQuantity" name="pro_quantity" type="number" value="1" style="max-width: 4rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="submit" name="btn_AddtoCart">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -67,7 +68,7 @@ endif;
             $result = $dblink->query($sql);
             $row1 = $result->fetch_row();
 
-            $result->data_seek(0);
+            // $result->data_seek(0);
 
             if ($result->num_rows > 0) :
                 while ($row = $result->fetch_assoc()) :
@@ -84,8 +85,8 @@ endif;
                                     <li><a href="#"><i class="fa fa-random"></i></a></li>
                                 </ul>
                                 <form action="?page=shoppingcart" method="POST">
-                                    
-
+                                    <input type="hidden" name="pro_id" value="<?= $row['id'] ?>">
+                                    <input type="hidden" name="pro_quantity" value="1" />
                                     <input type="submit" class="add-to-cart fw-bold" name="btnAddtoCart" value="Add to Cart" />
                                 </form>
 
@@ -107,9 +108,9 @@ endif;
     </div>
 </section>
 <?php
-if(isset($_GET['btnAddtoCart'])):
+if (isset($_GET['btnAddtoCart'])) :
     $id = $_POST['id'];
-    
+
     $c = new Connect();
     $dblink = $c->connectToPDO();
     $sql = "INSERT INTO `supplier`(`id`, `name`, `phone`, `address`) VALUES (?, ?, ?, ?)";
@@ -119,7 +120,7 @@ if(isset($_GET['btnAddtoCart'])):
 
     if ($check == true) :
         header("Location: ?page=supplier");
-        else :
+    else :
         echo "Failed!";
     endif;
 endif;

@@ -30,7 +30,11 @@
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-random"></i></a></li>
                             </ul>
-                            <a href="" class="add-to-cart">Add to Cart</a>
+                            <form action="?page=shoppingcart" method="POST">
+                                <input type="hidden" name="pro_id" value="<?= $row['id'] ?>">
+                                <input type="hidden" name="pro_quantity" value="1" />
+                                <input type="submit" class="add-to-cart fw-bold" name="btn_AddtoCart" value="Add to Cart" />
+                            </form>
                         </div>
                         <div class="product-content">
                             <h3 class="title"><a href="#"><?= $row['name'] ?></a></h3>
@@ -71,7 +75,11 @@
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-random"></i></a></li>
                             </ul>
-                            <a href="" class="add-to-cart">Add to Cart</a>
+                            <form action="?page=shoppingcart" method="POST">
+                                <input type="hidden" name="pro_id" value="<?= $row['id'] ?>">
+                                <input type="hidden" name="pro_quantity" value="1" />
+                                <input type="submit" class="add-to-cart fw-bold" name="btn_AddtoCart" value="Add to Cart" />
+                            </form>
                         </div>
                         <div class="product-content">
                             <h3 class="title"><a href="?page=<?php ?>"><?= $row['name'] ?></a></h3>

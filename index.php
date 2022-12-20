@@ -83,7 +83,7 @@ ob_start();
 
         // cartDetail
         elseif ($page == "cartDetail") :
-            include_once 'cartDetail.php';
+            include_once 'productDetail.php';
         // shoppingcart
         elseif ($page == "shoppingcart") :
             include_once 'shoppingCart.php';

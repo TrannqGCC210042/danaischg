@@ -166,7 +166,7 @@ if (isset($_POST['btnAdd_product'])) :
         $sup_id = $_POST['sup_id'];
 
 
-        $sql_pro = "INSERT INTO `product`(`id`, `name`, `status`, `description`, `price`, `for_gender`. `quantity`, `image`, `cate_id`, `sup_id`) VALUES (?, ?, ?, ? ,?, ?, ?,? ,?, ?)";
+        $sql_pro = "INSERT INTO `product`(`id`, `name`, `status`, `description`, `price`, `for_gender`, `quantity`, `image`, `cate_id`, `sup_id`) VALUES (?, ?, ?, ? ,?, ?, ?,? ,?, ?)";
 
         $re_pro = $dblink->prepare($sql_pro);
 

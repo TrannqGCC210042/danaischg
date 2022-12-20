@@ -81,24 +81,48 @@ if (isset($_POST['btnPayment'])) :
 
     $c = new Connect();
     $dblink = $c->connectToPDO();
-    $sql_order = "INSERT INTO `order`(`date`, `delivery_date`, `delivery_local`, `cust_name`, `cust_phone`, `total`, `status`, `username`) VALUES ( ?, ?, ?, ?, ?, ?, 0, ?)";
 
+    // Insert into Order
+    $sql_order = "INSERT INTO `order`(`date`, `delivery_date`, `delivery_local`, `cust_name`, `cust_phone`, `total`, `status`, `username`) VALUES ( ?, ?, ?, ?, ?, ?, 0, ?)";
     $result = $dblink->prepare($sql_order);
     $check = $result->execute(array("$now", "$now", "$address", "$name", "$telephone", "$total", "$user"));
 
-    $sql_updatePro = "UPDATE `product` SET `quantity`= ? WHERE id = ?";
+    $last_id = $dblink->lastInsertId();
 
-    if ($check == true) :
-        $sql_updatePro = "UPDATE `product` SET `quantity`= ? WHERE id = ?";
-        $update->execute(array("$now", "$now", "$address", "$name", "$telephone", "$total", "$user"));
+    // Select cart to add into orderdetail
+    $sql_selected = "SELECT cart_id, username, pcount, pid FROM `cart` WHERE username = ?";
+    $result = $dblink->prepare($sql_selected);
+    $check = $result->execute(array("$user"));
 
-        // $sql_orderDetail = "SELECT p.id, o.id, p.quantity FROM  `orderdetail` od JOIN  `order` o ON o.id = od.order_id
-        // JOIN `product` p ON p.id = od.pro_id
-        // WHERE o.id = (SELECT id FROM `order` WHERE delivery_date = (SELECT MAX(delivery_date) FROM `order`))";
+    $row = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        header("Location: ?page=shoppingcart");
-    else :
-        echo "Failed!";
-    endif;
+    foreach ($row as $r) :
+        $order_id = $r['order_id'];
+        $pro_id = $r['pid'];
+        $od_qty = $r['pcount'];
+
+        // Insert into OrderDetail
+        $sql_order = "INSERT INTO `orderdetail`(`order_id`, `pro_id`, `quantity`) VALUES (?, ?, ?)";
+        $result = $dblink->prepare($sql_order);
+        $check = $result->execute(array("$last_id", "$pro_id", "$od_qty"));
+
+        // Update into Product
+        $sql_order = "SELECT quantity FROM `product` WHERE `id`= ?";
+        $result = $dblink->prepare($sql_order);
+        $result->execute(array("$pro_id"));
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $update_quantity = $row['quantity'] - $od_qty;
+
+        $sql_order = "UPDATE `product` SET `quantity`= ? WHERE `id`= ?";
+        $result = $dblink->prepare($sql_order);
+        $check = $result->execute(array("$update_quantity", "$pro_id"));
+
+        // Delete into ShoppingCart
+        $sql_order = "DELETE FROM `cart` WHERE username = ?";
+        $result = $dblink->prepare($sql_order);
+        $check = $result->execute(array("$user"));
+
+    endforeach;
+    header("Location: ?page=shoppingcart");
 endif;
 ?>

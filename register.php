@@ -136,8 +136,6 @@
     </div>
 
     <?php
-    include_once 'connect.php';
-
     if (isset($_POST['btn-register'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -156,7 +154,6 @@
 
         $result = $dblink->prepare($sql);
         $check = $result->execute(array("$username", "$password", "$firstName", "$lastName", $gender, "$birthday", "$telephone", "$email", "$address", 0));
-
 
         if ($check == true) :
             // if(confirm)

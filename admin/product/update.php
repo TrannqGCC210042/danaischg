@@ -167,7 +167,7 @@ if (isset($_GET['id'])) :
                             $re = $dblink->query($sql);
 
                             while ($row_sup = $re->fetch_assoc()) :
-                                if ($row_sup['id'] = $row['cate_id']) :
+                                if ($row_sup['id'] = $row['sup_id']) :
                             ?>
                                     <option value="<?= $row_sup['id'] ?>" selected><?= $row_sup['name'] ?></option>
                                 <?php
@@ -234,22 +234,19 @@ if (isset($_GET['id'])) :
         if ($_FILES['file_image']['name']) :
             $img = str_replace('', '-', $_FILES['file_image']['name']);
             $storedImage = "./images/";
-            $flag = move_uploaded_file($_FILES['file_image']['tmp_name'], $storedImage . $img);
+            move_uploaded_file($_FILES['file_image']['tmp_name'], $storedImage . $img);
 
-            $sql = "UPDATE `product` SET `name`= ?,`status`= ?',`description`= ?',`price`= ?,`for_gender`= ?,`quantity`= ?, `image` =?, cate_id`= ?,`sup_id`= ? WHERE `id`= ?";
-
+            $sql = "UPDATE `product` SET `name`= ?,`status`= ?,`description`= ?,`price`= ?,`for_gender`= ?,`quantity`= ?, `image` = ?, `cate_id`= ?,`sup_id`= ? WHERE `id`= ?";
             $result = $dblink->prepare($sql);
             $execute = $result->execute(array("$name", "$status", "$description", "$price", "$gender", "$quantity", "$img", "$cate_id", "$sup_id", "$id"));
         else :
-            $sql = "UPDATE `product` SET `name`= ?,`status`= ?',`description`= ?',`price`= ?,`for_gender`= ?,`quantity`= ?,`cate_id`= ?,`sup_id`= ? WHERE `id`= ?";
+            $sql = "UPDATE `product` SET `name`= ?,`status`= ?,`description`= ?,`price`= ?,`for_gender`= ?,`quantity`= ?,`cate_id`= ?,`sup_id`= ? WHERE `id`= ?";
 
             $result = $dblink->prepare($sql);
-            $execute = $result->execute(array("$name", $status, "$description", $price, "$gender", "$quantity", "$cate_id", "$sup_id", "$id"));
+            $execute = $result->execute(array("$name", $status, "$description", $price, $gender, $quantity, "$cate_id", "$sup_id", "$id"));
         endif;
 
-
-
-        if ($execute == true) :
+        if ($execute) :
             header("Location: ?page=productManagement");
         else :
             echo "Failed!" . $execute;

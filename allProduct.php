@@ -97,6 +97,9 @@
                                         <div class="price">$<?= $row['price'] ?></div>
                                     </div>
                                 </div>
+
+
+                                
                             </div>
                     <?php
                         endwhile;

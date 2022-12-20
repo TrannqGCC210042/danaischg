@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2022 at 05:46 PM
+-- Generation Time: Dec 18, 2022 at 05:41 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.0.23
 
@@ -33,14 +33,6 @@ CREATE TABLE `cart` (
   `pid` varchar(10) NOT NULL,
   `pcount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `username`, `pid`, `pcount`) VALUES
-(20, 'trannq', 'P01', 1),
-(25, 'trannq', 'P04', 2);
 
 -- --------------------------------------------------------
 
@@ -89,8 +81,8 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `date`, `delivery_date`, `delivery_local`, `cust_name`, `cust_phone`, `total`, `status`, `username`) VALUES
-(5, '2022-12-17 14:55:07', '2022-12-17 14:55:07', 'Spain', 'Herdsman Turtleneck', '0916843367', '114', 0, 'trannq'),
-(6, '2022-12-17 16:59:40', '2022-12-17 16:59:40', 'CanTho', 'tran@0903', '0916843763', '114', 0, 'trannq');
+(25, '2022-12-18 05:30:48', '2022-12-18 05:30:48', 'Cantho', 'Nguyen Que Tran', '0843630939', '37', 0, 'tran0903'),
+(26, '2022-12-18 05:31:58', '2022-12-18 05:31:58', 'Cantho', 'Nguyen Que Tran', '0843630939', '209', 0, 'tran0903');
 
 -- --------------------------------------------------------
 
@@ -109,8 +101,9 @@ CREATE TABLE `orderdetail` (
 --
 
 INSERT INTO `orderdetail` (`order_id`, `pro_id`, `quantity`) VALUES
-(5, 'P04', 1),
-(6, 'P02', 3);
+(25, 'P03', 1),
+(26, 'P02', 2),
+(26, 'P03', 1);
 
 -- --------------------------------------------------------
 
@@ -137,8 +130,8 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `name`, `status`, `description`, `price`, `for_gender`, `quantity`, `image`, `cate_id`, `sup_id`) VALUES
 ('P01', 'Varsity for winter', 0, 'ădfesgrdtndgrefw', 23, 1, 0, 'Cropped_Jacket.png', 'C01', 'SP01'),
-('P02', 'Leo Cutout Wool Blazer Blue', 0, 'More than just an office Blazer, Leo creates a highlight for Dear José girls with a cut out at the waist to diversify in many outfits.', 86, 1, 0, 'Leo_Cutout_Wool_Blazer_Blue_1.png', 'C02', 'SP01'),
-('P03', 'Pleated Short Skirt', 0, 'A mini white fairy dress is perfect for Jose girls who love the glamorous and dreamy look.\r\nThe design is made up of petal cuts and ruffled lace treatment to create a princess float in every movement.', 32, 1, 0, 'Pleated_Short_Skirt_1.png', 'C01', 'SP02'),
+('P02', 'Leo Cutout Wool Blazer Blue', 0, 'More than just an office Blazer, Leo creates a highlight for Dear José girls with a cut out at the waist to diversify in many outfits.', 86, 1, -1, 'Leo_Cutout_Wool_Blazer_Blue_1.png', 'C02', 'SP01'),
+('P03', 'Pleated Short Skirt', 0, 'A mini white fairy dress is perfect for Jose girls who love the glamorous and dreamy look.\r\nThe design is made up of petal cuts and ruffled lace treatment to create a princess float in every movement.', 32, 1, -3, 'Pleated_Short_Skirt_1.png', 'C01', 'SP02'),
 ('P04', 'Leo Cutout Wool Blazer Brown', 0, 'More than just an office Blazer, Leo creates a highlight for Dear José girls with a cut out at the waist to diversify in many outfits.', 43, 1, 0, 'Leo_Cutout_Wool_Blazer_Brown_2.png', 'C02', 'SP02'),
 ('P05', 'Camellia Floral Minidress', 0, 'More than just an office Dress, Leo creates a highlight for Dear José girls with a cut out at the waist to diversify in many outfits.', 52, 1, 0, 'Camellia_Floral_Minidress_3.png', 'C04', 'SP04'),
 ('P06', 'Storm Bomber Surplus', 0, 'More than just an office Blazer, Leo creates a highlight for Dear José girls with a cut out at the waist to diversify in many outfits.', 72.6, 0, 0, 'Storm_Bomber_Surplus_3.png', 'C05', 'SP02'),
@@ -164,7 +157,6 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id`, `name`, `phone`, `address`) VALUES
-('P02', '', '', ''),
 ('SP01', 'Dear Róe', '0843630939', 'VietNam'),
 ('SP02', 'Chanel', '0978253689', 'America'),
 ('SP03', 'Mende', '09878546253', 'VietNam'),
@@ -194,7 +186,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `gender`, `birthday`, `telephone`, `email`, `address`, `role`) VALUES
-('trannq', '123', 'Herdsman', 'Turtleneck', 1, '2022-01-12', '0916843367', 'trannqgcc210042@fpt.edu.vn', 'Spain', 0);
+('admin', 'admin123', 'admin', 'admin', 0, '2012-11-15', '0123456789', 'admin@gmail.com', 'CanTho', 1),
+('tran0903', '12345', 'Nguyen', 'Que Tran', 1, '2022-01-12', '0843630939', 'trannqgcc210042@fpt.edu.vn', 'Cantho', 0);
 
 --
 -- Indexes for dumped tables
@@ -257,13 +250,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

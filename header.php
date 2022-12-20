@@ -34,7 +34,7 @@
                             // Display all category on women
                             $sql = "SELECT c.id as cate_id, c.name as cat_name, p.for_gender as for_gender FROM `category` c JOIN product p ON c.id = p.cate_id WHERE p.for_gender = 1 GROUP BY c.id";
                             $re = $dblink->query($sql);
-                            
+
                             while ($row = $re->fetch_assoc()) :
                             ?>
                                 <a class="dropdown-item" href="?page=product&id=<?= $row['cate_id'] ?>&gender=<?= $row['for_gender'] ?>"><?= $row['cat_name'] ?></a>
@@ -71,22 +71,30 @@
                     if (isset($_SESSION['username'])) :
                     ?>
                         <!-- Icon -->
-                        <a class="text-reset me-3" href="?page=shoppingcart">
+                        <a class="text-reset ms-5 ps-4 me-4" href="?page=shoppingcart">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                         <!-- Avatar -->
                         <div class="dropdown">
-                            <a class="d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAccount" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class=" hidden-arrow" href="#" id="navbarDropdownMenuAccount" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="images/account.png" class="rounded-circle" height="36" alt="My account" loading="lazy" />
-                                <label for="account" class="ms-2 me-4 link-dark"><?= $_SESSION['username'] ?></label>
+                                <label for="account" class="ms-2 me-4 link-dark" style="font-size: 1rem;"><?= $_SESSION['username'] ?></label>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdownMenuAccount">
                                 <li>
                                     <a href="?page=profile" class="dropdown-item">Profile</a>
                                 </li>
+                                <?php
+                                if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
+                                ?>
+                                    <li>
+                                        <a href="?page=order" class="dropdown-item">Administration</a>
+                                    </li>
+                                <?php
+                                endif;
+                                ?>
                                 <li>
-                                    <a href="?page=logout">
-                                        <a href="?page=logout" class="dropdown-item">Logout</a>
+                                    <a href="?page=logout" class="dropdown-item">Logout</a>
                                 </li>
                             </ul>
                         </div>

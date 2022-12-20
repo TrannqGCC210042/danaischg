@@ -12,27 +12,6 @@
     <!-- Main CSS-->
     <link href="css/register-login.css" rel="stylesheet" media="all">
 
-    <script>
-        // Function to check valid data
-        function formValid() {
-            var pw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-            f = document.formLogin
-
-            if (f.username.value.length > 10) {
-                alert("The username must be less than 10 characters");
-                f.username.focus();
-                return false;
-            }
-            if (pw.test(f.password.value)) {
-                alert("Invalid! Password must be at least eight characters, one letter, and one number");
-                f.password.focus();
-                return false;
-            }
-            return true;
-        }
-    </script>
-
     <?php
     $errLogin = "";
 
@@ -76,7 +55,7 @@
             <div class="card card-1">
                 <div class="card-body">
                     <h2 class="title fw-bold text-center">Login</h2>
-                    <form method="POST" name="formLogin" onclick="return formValid()">
+                    <form method="POST" name="formLogin">
                         <div class="input-group">
                             <input class="input--style-1" type="text" placeholder="USERNAME" name="username" value="<?= isset($_POST['username']) ? $_POST['username'] : "" ?>" required>
                         </div>

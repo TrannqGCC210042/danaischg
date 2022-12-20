@@ -46,7 +46,7 @@ a {
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: -between;
 }
 
 .input-group-text {
