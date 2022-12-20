@@ -16,36 +16,35 @@
     $errLogin = "";
 
     if (isset($_POST['btnLogin'])) :
-        // if (isset($_POST['username']) && isset($_POST['password'])) :
+        if (isset($_POST['username']) && isset($_POST['password'])) :
+            $username = $_POST['username'];
+            $password = $_POST['password'];
 
-        // else :  
-        //     echo "Register";
-        // endif;
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+            $c = new Connect();
+            $dblink = $c->connectToPDO();
+            $sql = "SELECT * FROM `user` WHERE username = ? AND password = ?";
 
-        $c = new Connect();
-        $dblink = $c->connectToPDO();
-        $sql = "SELECT * FROM `user` WHERE username = ? AND password = ?";
+            $stmt = $dblink->prepare($sql);
+            $check = $stmt->execute(array("$username", "$password"));
+            $numrow = $stmt->rowCount();
+            $row = $stmt->fetch(PDO::FETCH_BOTH);
 
-        $stmt = $dblink->prepare($sql);
-        $check = $stmt->execute(array("$username", "$password"));
-        $numrow = $stmt->rowCount();
-        $row = $stmt->fetch(PDO::FETCH_BOTH);
+            if ($numrow == 1) :
+                $_SESSION["username"] = $row['username'];
+                $_SESSION["firstName"] = $row['firstName'];
+                $_SESSION["lastName"] = $row['lastName'];
+                $_SESSION["address"] = $row['address'];
+                $_SESSION["telephone"] = $row['telephone'];
 
-        if ($numrow == 1) :
-            $_SESSION["username"] = $row['username'];
-            $_SESSION["firstName"] = $row['firstName'];
-            $_SESSION["lastName"] = $row['lastName'];
-            $_SESSION["address"] = $row['address'];
-            $_SESSION["telephone"] = $row['telephone'];
-
-            $_SESSION["role"] = $row['role'];
+                $_SESSION["role"] = $row['role'];
 
 
-            header("Location: index.php");
+                header("Location: index.php");
+            else :
+                $errLogin = "Username or password is incorrect!";
+            endif;
         else :
-            $errLogin = "Username or password is incorrect!";
+            echo "Register";
         endif;
     endif;
     ?>

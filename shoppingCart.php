@@ -75,35 +75,34 @@
 
                                 foreach ($row as $r) :
                             ?>
-                                    <form method="get">
-                                        <hr class="my-4">
-                                        <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                            <div class="col-md-2 col-lg-2 col-xl-2">
-                                                <img src="images/<?= $r['pro_image'] ?>" class="img-fluid rounded-3" alt="">
-                                            </div>
-                                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                                <h6 class="text-muted"><?= $r['cat_name'] ?></h6>
-                                                <h6 class="text-black mb-0"></h6><?= $r['pro_name'] ?></h6>
-                                            </div>
-                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
 
-                                                <input id="form1" min="0" name="quantity" value="<?= $r['quantity'] ?>" type="number" class="form-control form-control-sm" />
-
-                                                <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                <h6 class="mb-0">$<?= $r['price'] * $r['quantity'] ?></h6>
-                                            </div>
-                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                <a href="?page=shoppingcart&function=del&id=<?= $r['pro_id'] ?>" onclick="return deleteConfirm()" class="text-muted"><i class="fas fa-times"></i></a>
-                                            </div>
+                                    <hr class="my-4">
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="col-md-2 col-lg-2 col-xl-2">
+                                            <img src="images/<?= $r['pro_image'] ?>" class="img-fluid rounded-3" alt="">
                                         </div>
-                                    </form>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <h6 class="text-muted"><?= $r['cat_name'] ?></h6>
+                                            <h6 class="text-black mb-0"></h6><?= $r['pro_name'] ?></h6>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+
+                                            <input id="form1" min="0" name="quantity" value="<?= $r['quantity'] ?>" type="number" class="form-control form-control-sm" />
+
+                                            <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h6 class="mb-0">$<?= $r['price'] * $r['quantity'] ?></h6>
+                                        </div>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <a href="?page=shoppingcart&function=del&id=<?= $r['pro_id'] ?>" onclick="return deleteConfirm()" class="text-muted"><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </div>
                                 <?php
                                     $total += $r['price'] * $r['quantity'];
                                 endforeach;
@@ -161,7 +160,9 @@
                                 <h5>$<?= $total + 5 ?></h5>
                             </div>
 
-                            <a href="?page=payment" class="btn btn-dark btn-block btn-lg" name="btnCheckout">Checkout</a>
+                            <form action="?page=payment" method="post">
+                                <input type="submit" class="btn btn-dark btn-block btn-lg" name="btnCheckout" value="Checkout">
+                            </form>
                         </div>
                     </div>
                 <?php

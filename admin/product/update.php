@@ -232,6 +232,7 @@ if (isset($_GET['id'])) :
         $dblink = $c->connectToPDO();
 
         if ($_FILES['file_image']['name']) :
+            // remove ''
             $img = str_replace('', '-', $_FILES['file_image']['name']);
             $storedImage = "./images/";
             move_uploaded_file($_FILES['file_image']['tmp_name'], $storedImage . $img);

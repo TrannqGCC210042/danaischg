@@ -33,8 +33,8 @@
                 f.password.focus();
                 return false;
             }
-            if (f.firstName.value.length > 20) {
-                alert("First Name must be less than 20 characters");
+            if (f.firstName.value.length > 15) {
+                alert("First Name must be less than 15 characters");
                 f.firstName.focus();
                 return false;
             }
@@ -43,8 +43,8 @@
                 f.firstName.focus();
                 return false;
             }
-            if (f.lastName.value.length > 30) {
-                alert("Last Name must be less than 30 characters");
+            if (f.lastName.value.length > 20) {
+                alert("Last Name must be less than 20 characters");
                 return false;
             }
             if (format.test(f.lastName.value)) {
@@ -70,16 +70,68 @@
         }
     </script>
 
+    <?php
+    $errLogin = "";
+
+    if (isset($_POST['btn-register'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $gender = $_POST['gender'];
+        $birthday = date('Y-m-d', strtotime($_POST['birthday']));
+        $telephone = $_POST['phone'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
+
+        $c = new Connect();
+        $dblink = $c->connectToPDO();
+
+        $sql = "SELECT * FROM `user` WHERE username = ?";
+        $result = $dblink->prepare($sql);
+        $check = $result->execute(array("$username"));
+        $numrow = $result->rowCount();
+        $row = $result->fetch(PDO::FETCH_BOTH);
+
+        if ($numrow == 0) :
+
+            $sql = "INSERT INTO `user`(`username`, `password`, `firstName`, `lastName`, `gender`, `birthday`, `telephone`, `email`, `address`, `role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            $result = $dblink->prepare($sql);
+            $check = $result->execute(array("$username", "$password", "$firstName", "$lastName", $gender, "$birthday", "$telephone", "$email", "$address", 0));
+
+            if ($check == true) :
+                // if(confirm)
+                echo "<meta http-equiv='refresh' content='0;url=?page=login'>";
+            else :
+                echo "Failed!";
+            endif;
+        else:
+            $errLogin = "Username already exists!";
+        endif;
+    }
+    ?>
     <div class="page-wrapper p-t-50 p-b-50 font-robo">
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
                 <div class="card-body">
                     <h2 class="title fw-bold text-center">Registration</h2>
                     <form name="formRegister" method="POST" onsubmit="return formValid()">
-                        <div class="input-group">
+                        <div class="input-group mb-0">
                             <input class="input--style-1" type="text" placeholder="USERNAME" name="username" required>
                         </div>
-                        <div class="input-group">
+                        <?php
+                        if ($errLogin != "") :
+                        ?>
+                            <div>
+                                <span class="text-danger"><?= $errLogin ?></span>
+                            </div>
+                        <?php
+                        endif;
+                        ?>
+
+
+                        <div class="input-group mt-4">
                             <input class="input--style-1" type="password" placeholder="PASSWORD" name="password" required>
                         </div>
                         <div class="input-group">
@@ -134,32 +186,3 @@
             </div>
         </div>
     </div>
-
-    <?php
-    if (isset($_POST['btn-register'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $gender = $_POST['gender'];
-        $birthday = date('Y-m-d', strtotime($_POST['birthday']));
-        $telephone = $_POST['phone'];
-        $email = $_POST['email'];
-        $address = $_POST['address'];
-
-        $c = new Connect();
-        $dblink = $c->connectToPDO();
-
-        $sql = "INSERT INTO `user`(`username`, `password`, `firstName`, `lastName`, `gender`, `birthday`, `telephone`, `email`, `address`, `role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $result = $dblink->prepare($sql);
-        $check = $result->execute(array("$username", "$password", "$firstName", "$lastName", $gender, "$birthday", "$telephone", "$email", "$address", 0));
-
-        if ($check == true) :
-            // if(confirm)
-            echo "<meta http-equiv='refresh' content='0;url=?page=login'>";
-        else :
-            echo "Failed!";
-        endif;
-    }
-    ?>

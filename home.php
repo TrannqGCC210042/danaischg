@@ -37,7 +37,7 @@
                             </form>
                         </div>
                         <div class="product-content">
-                            <h3 class="title"><a href="#"><?= $row['name'] ?></a></h3>
+                            <h3 class="title"><a href="?page=cartDetail&pro_id=<?= $row['id'] ?>"><?= $row['name'] ?></a></h3>
                             <div class="price">$<?= $row['price'] ?></div>
                         </div>
                     </div>
