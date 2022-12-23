@@ -2,7 +2,27 @@
     // Function to check valid data
     function formValid() {
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-        f = document.formAddproduct
+        var phone_pattern = /^(\(0\d{1,2}\)\d{7})|(0\d{9})$/;
+
+        f = document.formUpdateproduct
+
+        if (format.test(f.name.value)) {
+            alert("Invalid Product name , please enter again");
+            f.name.focus();
+            return false;
+        }
+
+        if (f.price.value <= 0) {
+            alert("Price must be greater than 0, please enter again");
+            f.price.focus();
+            return false;
+        }
+
+        if (f.quantity.value <= 0) {
+            alert("Quantity must be greater than 0, please enter again");
+            f.quantity.focus();
+            return false;
+        }
 
         if (f.cat_id.value == 0) {
             alert("Please choose category");
@@ -12,10 +32,12 @@
             alert("Please choose supplier");
             return false;
         }
+
         if (f.status.checked == false) {
             alert("Please choose status");
             return false;
         }
+        
         return true;
     }
 </script>
@@ -48,7 +70,7 @@ if (isset($_GET['id'])) :
         <!-- Form of product -->
         <div class="pt-3 col-lg-10 col-md-9 col-12">
             <h1 class="text-center pb-4">Update Product</h1>
-            <form id="formAddproduct" name="formAddproduct" method="POST" enctype="multipart/form-data" onsubmit="return formValid()" style="margin: 0 10% 0 10%">
+            <form id="formUpdateproduct" name="formUpdateproduct" method="POST" enctype="multipart/form-data" onsubmit="return formValid()" style="margin: 0 10% 0 10%">
                 <div class="form-group mt-3">
                     <label class="form-label font-weight-bold" for="ID">Product ID</label>
                     <input type="text" name="id" id="id" class="form-control" placeholder="" readonly value="<?= $row['id'] ?>" />
@@ -186,12 +208,12 @@ if (isset($_GET['id'])) :
 
                 <div class="form-group mt-3">
                     <label class="form-label font-weight-bold" for="Price">Price</label>
-                    <input type="number" name="price" id="price" step="0.01" min="1" class="form-control" placeholder="" required value="<?= $row['price'] ?>" />
+                    <input type="number" name="price" id="price" step="0.01" class="form-control" placeholder="" required value="<?= $row['price'] ?>" />
                 </div>
 
                 <div class="form-group mt-3">
                     <label class="form-label font-weight-bold" for="Price">Quantity</label>
-                    <input type="number" name="quantity" id="quantity" min="1" class="form-control" placeholder="" required value="<?= $row['quantity'] ?>" />
+                    <input type="number" name="quantity" id="quantity" class="form-control" placeholder="" required value="<?= $row['quantity'] ?>" />
                 </div>
 
                 <div class="form-group mt-3">

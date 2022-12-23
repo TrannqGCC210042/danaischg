@@ -62,7 +62,7 @@ endif;
             <?php
             $c = new Connect();
             $dblink = $c->connectToMySQL();
-            $sql = "SELECT * FROM `product` LIMIT 4";
+            $sql = "SELECT * FROM `product` LIMIT 5";
 
             //<1>
             $result = $dblink->query($sql);

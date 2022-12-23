@@ -62,7 +62,7 @@
                             <input class="input--style-1" type="password" placeholder="PASSWORD" name="password" required>
                         </div>
                         <div class="input--style-1 text-center">
-                            <p>You don't have an account yet? <a href="?page=register">Registration</a></p>
+                            <p>You don't have an account yet? <a href="?page=register">Sign-up</a></p>
                         </div>
                         <?php
                         if ($errLogin != "") :

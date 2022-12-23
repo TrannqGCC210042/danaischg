@@ -14,7 +14,10 @@
             $c = new Connect();
             $dblink = $c->connectToMySQL();
 
-            $sql = "SELECT * FROM `product` LIMIT 4;";
+            $sql = "SELECT *, SUM(od.quantity) FROM `orderdetail` od 
+            JOIN `order` o ON od.order_id = o.id
+            JOIN `product` p ON p.id = od.pro_id GROUP BY od.pro_id 
+            ORDER BY SUM(od.quantity) DESC LIMIT 4";
             $stmt = $dblink->query($sql);
 
             while ($row = $stmt->fetch_assoc()) :
@@ -102,12 +105,10 @@
             -moz-transition: all 0.4s ease;
             transition: all 0.4s ease;
             color: black;
-
-
+            border: 2px solid black;
         }
 
         .btn-radius {
-            border: none;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             border-radius: 3px;

@@ -1,7 +1,28 @@
 <script>
+    // Function to check valid data
     function formValid() {
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+        var phone_pattern = /^(\(0\d{1,2}\)\d{7})|(0\d{9})$/;
+
         f = document.formAddproduct
+
+        if (format.test(f.name.value)) {
+            alert("Invalid Product name , please enter again");
+            f.name.focus();
+            return false;
+        }
+
+        if (f.price.value <= 0) {
+            alert("Price must be greater than 0, please enter again");
+            f.price.focus();
+            return false;
+        }
+
+        if (f.quantity.value <= 0) {
+            alert("Quantity must be greater than 0, please enter again");
+            f.quantity.focus();
+            return false;
+        }
 
         if (f.cat_id.value == 0) {
             alert("Please choose category");
@@ -11,10 +32,12 @@
             alert("Please choose supplier");
             return false;
         }
-        if (f.shop_id.value == 0) {
-            alert("Please choose shop");
+
+        if (f.status.checked == false) {
+            alert("Please choose status");
             return false;
         }
+        
         return true;
     }
 </script>

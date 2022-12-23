@@ -4,14 +4,14 @@
         var format = /[!@#$%^&*()_+\=\[\]{};':"\\|<>\/?]+/;
 
         f = document.formUpdatecategory
-        
+
         if (format.test(f.name.value)) {
-            alert("Category name can't contain special character, please enter again");
+            alert("Invalid Category Name, please enter again");
             f.name.focus();
             return false;
         }
         if (format.test(f.description.value)) {
-            alert("Category description can't contain special character, please enter again");
+            alert("Invalid Category description, please enter again");
             f.txtCatDesc.focus();
             return false;
         }

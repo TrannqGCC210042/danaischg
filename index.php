@@ -48,7 +48,10 @@ ob_start();
         // Admin page
         elseif ($page == "order") :
             include_once 'admin/order/order.php';
-
+        // Manament orderDetail
+        elseif ($page == "orderDetail") :
+            include_once 'admin/order/orderDetail.php';
+            
         // Manament category
         elseif ($page == "category") :
             include_once 'admin/category/list.php';
@@ -73,14 +76,6 @@ ob_start();
         elseif ($page == "updateProduct") :
             include_once 'admin/product/update.php';
 
-        // Manament orderDetail
-        elseif ($page == "orderDetail") :
-            include_once 'admin/orderDetail/list.php';
-        elseif ($page == "addOrderDetail") :
-            include_once 'admin/orderDetail/add.php';
-        elseif ($page == "updateOrderDetail") :
-            include_once 'admin/orderDetail/update.php';
-
         // cartDetail
         elseif ($page == "cartDetail") :
             include_once 'productDetail.php';
@@ -90,6 +85,9 @@ ob_start();
         // payment
         elseif ($page == "payment") :
             include_once 'payment.php';
+        elseif ($page == "successful") :
+            include_once 'successful.php';
+
         endif;
     else :
         include_once 'home.php';

@@ -122,10 +122,19 @@
                                     $id = $_GET['id'];
                                     $user = $_SESSION['username'];
 
+                                    // Update total before comfirm delete
+                                    $sqlSelect = "SELECT * FROM `cart` c JOIN `product` p ON p.id = c.pid WHERE username = ? AND id = ?";
+                                    $stmt = $dblink->prepare($sqlSelect);
+                                    $execute = $stmt->execute(array("$user", "$id"));
+                                    $row = $result->fetch(PDO::FETCH_ASSOC);
+                                    
+                                    $total = $row['pid'] *  $row['price'] * $row['pcount'];
+
+                                    // Delete product into Cart
                                     $sqlSelect = "DELETE FROM `cart` WHERE username = ? AND pid = ?";
                                     $stmt = $dblink->prepare($sqlSelect);
                                     $execute = $stmt->execute(array("$user", "$id"));
-
+                                                                    
                                     if ($execute) :
                                         header("Location: ?page=shoppingcart");
                                     endif;

@@ -2,13 +2,12 @@
     // Function to check valid data
     function formValid() {
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-        var validname = /^[A-Za-z]+|(\s)$/;
-        var phone_pattern = /^(\(0\d{1,3}\)\d{7})|(0\d{9,10})$/;
+        var phone_pattern = /^(\(0\d{1,2}\)\d{7})|(0\d{9})$/;
 
         f = document.formAddSupplier
 
         if (format.test(f.name.value)) {
-            alert("Supplier name can't contain special character, please enter again");
+            alert("Invalid Supplier name , please enter again");
             f.name.focus();
             return false;
         }

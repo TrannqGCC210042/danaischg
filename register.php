@@ -52,6 +52,11 @@
                 f.lastName.focus();
                 return false;
             }
+            if (phone_pattern.test(f.phone.value) == false) {
+                alert("Invalid phone number! Enter again, please.");
+                f.phone.focus();
+                return false;
+            }
             if (mail.test(f.email.value) == false) {
                 alert("Invalid email! Try again, please.");
                 f.email.focus();
@@ -72,6 +77,7 @@
 
     <?php
     $errLogin = "";
+    $errEmail = "";
 
     if (isset($_POST['btn-register'])) {
         $username = $_POST['username'];
@@ -93,8 +99,17 @@
         $numrow = $result->rowCount();
         $row = $result->fetch(PDO::FETCH_BOTH);
 
-        if ($numrow == 0) :
+        $sql_email = "SELECT * FROM `user` WHERE email = ?";
+        $re_email = $dblink->prepare($sql_email);
+        $check = $re_email->execute(array("$email"));
+        $numrow_email = $re_email->rowCount();
+        $row_email = $re_email->fetch(PDO::FETCH_BOTH);
 
+        if ($numrow != 0) :
+            $errLogin = "Username already exists!";
+        elseif ($numrow_email != 0) :
+            $errEmail = "Email already exists!";
+        else :
             $sql = "INSERT INTO `user`(`username`, `password`, `firstName`, `lastName`, `gender`, `birthday`, `telephone`, `email`, `address`, `role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $result = $dblink->prepare($sql);
@@ -106,8 +121,6 @@
             else :
                 echo "Failed!";
             endif;
-        else:
-            $errLogin = "Username already exists!";
         endif;
     }
     ?>
@@ -118,7 +131,7 @@
                     <h2 class="title fw-bold text-center">Registration</h2>
                     <form name="formRegister" method="POST" onsubmit="return formValid()">
                         <div class="input-group mb-0">
-                            <input class="input--style-1" type="text" placeholder="USERNAME" name="username" required>
+                            <input class="input--style-1" type="text" placeholder="USERNAME" name="username" value="<?= isset($_POST['username']) ? $_POST['username'] : "" ?>" required>
                         </div>
                         <?php
                         if ($errLogin != "") :
@@ -129,8 +142,6 @@
                         <?php
                         endif;
                         ?>
-
-
                         <div class="input-group mt-4">
                             <input class="input--style-1" type="password" placeholder="PASSWORD" name="password" required>
                         </div>
@@ -140,12 +151,12 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <input class="input--style-1" type="text" placeholder="FIRST NAME" name="firstName" required>
+                                    <input class="input--style-1" type="text" placeholder="FIRST NAME" name="firstName" value="<?= isset($_POST['firstName']) ? $_POST['firstName'] : "" ?>" required>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    <input class="input--style-1" type="text" placeholder="LAST NAME" name="lastName" required>
+                                    <input class="input--style-1" type="text" placeholder="LAST NAME" name="lastName" value="<?= isset($_POST['lastName']) ? $_POST['lastName'] : "" ?>" required>
                                 </div>
                             </div>
                         </div>
@@ -170,13 +181,22 @@
                             </div>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="PHONE NUMBER" name="phone" required>
+                            <input class="input--style-1" type="text" placeholder="PHONE NUMBER" name="phone" value="<?= isset($_POST['phone']) ? $_POST['phone'] : "" ?>" required>
                         </div>
-                        <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="EMAIL" name="email" required>
+                        <div class="input-group mb-0">
+                            <input class="input--style-1" type="text" placeholder="EMAIL" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : "" ?>" required>
                         </div>
-                        <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="ADDRESS" name="address" required>
+                        <?php
+                        if ($errEmail != "") :
+                        ?>
+                            <div>
+                                <span class="text-danger"><?= $errEmail ?></span>
+                            </div>
+                        <?php
+                        endif;
+                        ?>
+                        <div class="input-group mt-4">
+                            <input class="input--style-1" type="text" placeholder="ADDRESS" name="address" value="<?= isset($_POST['address']) ? $_POST['address'] : "" ?>" required>
                         </div>
                         <div class="p-t-20">
                             <input class="btn-click btn--radius btn--black" type="submit" value="Register" name="btn-register"></input>

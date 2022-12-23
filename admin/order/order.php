@@ -14,9 +14,9 @@
     </script>
 
     <div class="col-lg-10 col-md-9 col-12">
-        <div class="pt-2 mb-2">
-            <h1 class="font-family text-center mb-4">Order List</h1>
-
+        <div class="mb-2">
+            <h1 class="font-family text-center ">Order List</h1>
+            <!-- 
             <div class="text-center mb-2 d-flex justify-content-around">
                 <form action="/manage/order" name="formOrder" method="GET">
                     <div class="row">
@@ -26,7 +26,7 @@
                         <button class="btn btn-secondary col-2 p-0" type="submit"><i class="bi bi-search"></i></button>
                     </div>
                 </form>
-            </div>
+            </div> -->
 
             <table id="tableorder" class="table table-striped table-bordered m-0" cellspacing="0" width="100%">
                 <thead class=" font-family justify-content-md-between justify-content-sm-center align-content-center border-bottom border-2 my-2 text-light bg-dark p-3 rounded-3">
@@ -55,67 +55,74 @@
                         <th>
                             <strong>Status</strong>
                         </th>
-                        <th>
-                            <strong>Delete</strong>
-                        </th>
                     </tr>
                 </thead>
 
                 <tbody class="justify-content-md-between justify-content-sm-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
-                    <tr>
-                        <td class="text-center">
-                            <a href="/manage/order/detail/29" style="text-decoration: none;">3</a>
-                        </td>
 
-                        <td class="text-center">2022-10-24, 08:56:39</td>
-                        <td class="text-center">2022-10-24, 08:56:39</td>
+                    <?php
+                    $c = new Connect();
+                    $dblink = $c->connectToMySQL();
 
-                        <td class="text-center">Tran Kim Khanh</td>
-                        <td class="text-center">0656498898</td>
-                        <td>Ninh Kieu District, Can Tho City</td>
-                        <td class="text-center"><b>$95.76</b></td>
-                        <td class="text-center">
-                            <form action="/manage/order/status" method="POST">
-                                <input type="hidden" name="status" value="false" />
-                                <input type="hidden" name="order_id" value="29" />
-                                <button type="submit" class="btn btn-danger" width="10" height="10"><i class="bi bi-x-lg"></i></button>
-                            </form>
-                        </td>
-                        <td class="text-center">
-                            <form method="POST" action="order/delete/29?_method=DELETE" onsubmit="return deleteConfirm()">
-                                <button type="submit" style="border: none; cursor: pointer;"><i class="bi bi-trash-fill" style="color: red;"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <a href="/manage/order/detail/28" style="text-decoration: none;">4</a>
-                        </td>
+                    $sql = "SELECT * FROM `order`";
+                    $re = $dblink->query($sql);
 
-                        <td class="text-center">2022-10-22, 18:41:43</td>
-                        <td class="text-center">2022-10-23, 17:43:16</td>
+                    while ($row = $re->fetch_assoc()) :
+                    ?>
+                        <tr>
+                            <td class="text-center">
+                                <a href="?page=orderDetail&id=<?= $row['id'] ?>" style="text-decoration: none;"><?= $row['id'] ?></a>
+                            </td>
 
-                        <td class="text-center">Nguyen Que Tran</td>
-                        <td class="text-center">0916843367</td>
-                        <td>No. 160, 30/4 Street, An Phu Ward, Ninh Kieu District, Can Tho City</td>
-                        <td class="text-center"><b>$41.6</b></td>
-                        <td class="text-center">
-                            <form action="/manage/order/status" method="POST">
-                                <input type="hidden" name="status" value="true" />
-                                <input type="hidden" name="order_id" value="28" />
-                                <button type="submit" class="btn btn-success" width="10" height="10"><i class="bi bi-check-lg"></i></button>
-                            </form>
-                        </td>
-                        <td class="text-center">
-                            <form method="POST" action="order/delete/28?_method=DELETE" onsubmit="return deleteConfirm()">
-                                <button type="submit" style="border: none; cursor: pointer;"><i class="bi bi-trash-fill" style="color: red;"></i></button>
-                            </form>
-                        </td>
-                    </tr>
+                            <td class="text-center"><?= $row['date'] ?></td>
+                            <td class="text-center"><?= $row['delivery_date'] ?></td>
+
+                            <td class="text-center"><?= $row['cust_name'] ?></td>
+                            <td class="text-center"><?= $row['cust_phone'] ?></td>
+                            <td><?= $row['delivery_local'] ?></td>
+                            <td class="text-center"><b>$<?= $row['total'] ?></b></td>
+                            <td class="text-center">
+                                <form action="?page=order" method="POST">
+                                    <?php
+                                    if ($row['status'] == 0) :
+                                    ?>
+                                        <input type="hidden" name="status" value="1" />
+                                        <input type="hidden" name="order_id" value="<?= $row['id'] ?>" />
+                                        <button type="submit" class="btn btn-danger" width="10" name="btnChangeStatus" height="10"><i class="bi bi-x-lg"></i></button>
+                                    <?php
+                                    else :
+                                    ?>
+                                        <input type="hidden" name="status" value="0" />
+                                        <input type="hidden" name="order_id" value="<?= $row['id'] ?>" />
+                                        <button type="submit" class="btn btn-success" width="10" name="btnChangeStatus" height="10"><i class="fa-solid fa-check"></i></i></button>
+                                    <?php
+                                    endif;
+                                    ?>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php
+                    endwhile;
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
 </section>
+<?php
+if (isset($_POST['btnChangeStatus'])) :
+    $status = $_POST['status'];
+    $order_id = $_POST['order_id'];
 
+    $c = new Connect();
+    $dblink = $c->connectToPDO();
 
+    $sql = "UPDATE `order` SET `status` = ? WHERE id = ?";
+
+    $re = $dblink->prepare($sql);
+    $re->execute([$status, $order_id]);
+
+    header("Location: ?page=order");
+endif;
+
+?>
