@@ -14,10 +14,10 @@
                         <div class="rs-select2 js-select-simple select--no-search">
                             <select name="sort_by" onchange="location = this.value;">
                                 <option disabled="disabled" value="2" selected>SORT BY</option>
-                                <option value="?page=product&sort_by=name&order=ASC">A -> Z</option>
-                                <option value="?page=product&sort_by=name&order=DESC">Z -> A</option>
-                                <option value="?page=product&sort_by=price&order=ASC">Low to high</option>
-                                <option value="?page=product&sort_by=price&order=DESC">High to low</option>
+                                <option value="?page=product&pro_id=&sort_by=name&order=ASC">A -> Z</option>
+                                <option value="?page=product&pro_id=&sort_by=name&order=DESC">Z -> A</option>
+                                <option value="?page=product&pro_id=&sort_by=price&order=ASC">Low to high</option>
+                                <option value="?page=product&pro_id=&sort_by=price&order=DESC">High to low</option>
                             </select>
                             <div class="select-dropdown"></div>
                         </div>

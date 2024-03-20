@@ -132,18 +132,6 @@
                         ?>
                     </tbody>
                 </table>
-                <!-- <div class="wrapper mt-4">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link active" href="/manage/product?page=1">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="/manage/product?page=2">2</a></li>
-                            <li class="page-item"><a class="page-link" href="/manage/product?page=3">3</a></li>
-                            <li class="page-item"><a class="page-link" href="/manage/product?page=2">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> -->
             </div>
         </div>
     </section>
